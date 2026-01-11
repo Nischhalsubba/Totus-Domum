@@ -12,31 +12,39 @@ const IntroSection: React.FC = () => {
     offset: ["start end", "end start"]
   });
   
-  // Parallax values
-  const yParallax = useTransform(scrollYProgress, [0, 1], [50, -50]);
-  const bigTextY = useTransform(scrollYProgress, [0, 1], [-100, 100]);
-
+  // Subtle parallax for content
+  const yParallax = useTransform(scrollYProgress, [0, 1], [30, -30]);
+  
   return (
     <section ref={containerRef} className="py-32 md:py-48 bg-[#FAFAFA] relative overflow-hidden">
       
-      {/* Background Decor - Massive Watermark Parallax */}
-      <motion.div 
-        style={{ y: bigTextY }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-center pointer-events-none opacity-[0.02] select-none"
-      >
-        <span className="font-serif text-[25vw] leading-none text-brand-dark whitespace-nowrap">
-            EXCELLENCE
-        </span>
-      </motion.div>
+      {/* Background Decor - Premium Ambient Light */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {/* Soft Golden Glow Top Left */}
+        <motion.div 
+            style={{ 
+                x: useTransform(scrollYProgress, [0, 1], [-100, 50]),
+                opacity: useTransform(scrollYProgress, [0, 0.5, 1], [0.3, 0.6, 0.3]) 
+            }}
+            className="absolute -top-[20%] -left-[10%] w-[50vw] h-[50vw] bg-brand-gold/10 rounded-full blur-[120px]"
+        />
+        {/* Soft Gray Glow Bottom Right */}
+        <motion.div 
+            style={{ 
+                x: useTransform(scrollYProgress, [0, 1], [100, -50]),
+            }}
+            className="absolute -bottom-[20%] -right-[10%] w-[60vw] h-[60vw] bg-gray-200/40 rounded-full blur-[100px]"
+        />
+      </div>
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="flex flex-col items-center text-center">
             
-            {/* Top Label with Vertical Line */}
+            {/* Top Label with Vertical Line - Connecting from Hero */}
             <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={isInView ? { opacity: 1, height: "auto" } : {}}
-                transition={{ duration: 1, delay: 0.1 }}
+                initial={{ opacity: 0 }}
+                animate={isInView ? { opacity: 1 } : {}}
+                transition={{ duration: 1, delay: 0.2 }}
                 className="mb-12 flex flex-col items-center gap-6"
             >
                 <span className="text-[10px] uppercase tracking-[0.4em] text-brand-gold font-bold">
@@ -44,8 +52,8 @@ const IntroSection: React.FC = () => {
                 </span>
                 <motion.div 
                     initial={{ height: 0 }}
-                    animate={isInView ? { height: 64 } : {}}
-                    transition={{ duration: 1, delay: 0.4, ease: "easeInOut" }}
+                    animate={isInView ? { height: 80 } : {}}
+                    transition={{ duration: 1.2, delay: 0.4, ease: "easeInOut" }}
                     className="w-px bg-brand-gold/40"
                 ></motion.div>
             </motion.div>
@@ -55,9 +63,9 @@ const IntroSection: React.FC = () => {
                 {/* 'Excellence in' - Split Masked Reveal */}
                 <div className="overflow-hidden">
                     <motion.h2
-                        initial={{ y: "100%" }}
-                        animate={isInView ? { y: 0 } : {}}
-                        transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }} // Luxury ease
+                        initial={{ y: "110%", opacity: 0 }}
+                        animate={isInView ? { y: 0, opacity: 1 } : {}}
+                        transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1] }} 
                         className="font-serif text-6xl md:text-8xl lg:text-9xl text-brand-dark leading-[0.9] tracking-tight"
                     >
                         Excellence in
@@ -67,9 +75,9 @@ const IntroSection: React.FC = () => {
                 {/* 'Every Detail' - Sophisticated Reveal */}
                 <div className="relative mt-2 md:-mt-4">
                     <motion.div
-                        initial={{ clipPath: "polygon(0 0, 0 0, 0 100%, 0% 100%)" }}
-                        animate={isInView ? { clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)" } : {}}
-                        transition={{ duration: 1.8, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                        initial={{ clipPath: "polygon(0 0, 0 0, 0 100%, 0% 100%)", x: 20 }}
+                        animate={isInView ? { clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)", x: 0 } : {}}
+                        transition={{ duration: 2, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
                         className="inline-block"
                     >
                         <h2 className="font-cursive text-7xl md:text-9xl lg:text-[11rem] text-brand-gold leading-none pr-8 py-4 drop-shadow-sm">
@@ -84,9 +92,9 @@ const IntroSection: React.FC = () => {
                 {/* Left: Bold Statement */}
                 <motion.div 
                     className="md:col-span-5 md:pl-8 relative"
-                    initial={{ opacity: 0, x: -30 }}
-                    animate={isInView ? { opacity: 1, x: 0 } : {}}
-                    transition={{ duration: 1, delay: 1 }}
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 1.2, delay: 0.8, ease: "easeOut" }}
                 >
                     {/* Decorative Corner */}
                     <div className="absolute top-0 left-0 w-8 h-8 border-t border-l border-brand-gold/30 -translate-x-4 -translate-y-4"></div>
@@ -101,10 +109,10 @@ const IntroSection: React.FC = () => {
 
                 {/* Divider */}
                 <motion.div 
-                    className="hidden md:block md:col-span-2 h-32 w-px bg-brand-dark/10 mx-auto mt-8"
-                    initial={{ scaleY: 0 }}
+                    className="hidden md:block md:col-span-2 h-40 w-px bg-brand-dark/5 mx-auto mt-8"
+                    initial={{ scaleY: 0, originY: 0 }}
                     animate={isInView ? { scaleY: 1 } : {}}
-                    transition={{ duration: 1, delay: 1.2 }}
+                    transition={{ duration: 1.5, delay: 1 }}
                 />
 
                 {/* Right: Detailed Paragraph */}
@@ -113,19 +121,19 @@ const IntroSection: React.FC = () => {
                     className="md:col-span-5 md:pr-8 md:pt-12"
                     initial={{ opacity: 0 }}
                     animate={isInView ? { opacity: 1 } : {}}
-                    transition={{ duration: 1, delay: 1.3 }}
+                    transition={{ duration: 1.2, delay: 1 }}
                 >
                     <p className="text-brand-charcoal/70 font-light leading-relaxed text-base md:text-lg mb-8">
                         From managing global property portfolios to coordinating executive schedules, we handle the arduous tasks with empathy and precision. We operate with the understanding that your time is the ultimate luxury.
                     </p>
                     
                     <div className="flex items-center gap-4 group cursor-pointer">
-                        <div className="w-12 h-12 rounded-full border border-brand-dark/20 flex items-center justify-center group-hover:border-brand-gold group-hover:bg-brand-gold transition-all duration-300">
-                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-brand-dark group-hover:text-white transition-colors">
+                        <div className="w-12 h-12 rounded-full border border-brand-dark/20 flex items-center justify-center group-hover:border-brand-gold group-hover:bg-brand-gold transition-all duration-500">
+                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-brand-dark group-hover:text-white transition-colors duration-300">
                                 <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                              </svg>
                         </div>
-                        <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-brand-dark group-hover:text-brand-gold transition-colors">
+                        <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-brand-dark group-hover:text-brand-gold transition-colors duration-300">
                             Our Philosophy
                         </span>
                     </div>

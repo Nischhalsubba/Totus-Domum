@@ -1,3 +1,4 @@
+
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform, useInView, Variants } from 'framer-motion';
 import { LogoIcon } from './Logo';
@@ -14,19 +15,17 @@ const WatermarkSection: React.FC = () => {
     offset: ["start end", "end start"]
   });
 
-  // Parallax effects for the background logo - slower movement for depth
-  const bgY = useTransform(scrollYProgress, [0, 1], [-150, 150]);
-  const bgRotate = useTransform(scrollYProgress, [0, 1], [-10, 5]);
-  const bgScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.1, 1, 0.9]);
-  const bgOpacity = useTransform(scrollYProgress, [0.2, 0.5, 0.8], [0, 0.12, 0]);
+  // Extremely subtle parallax for the background logo
+  const bgY = useTransform(scrollYProgress, [0, 1], [-50, 50]);
+  const bgRotate = useTransform(scrollYProgress, [0, 1], [-5, 5]);
+  const bgOpacity = useTransform(scrollYProgress, [0.2, 0.5, 0.8], [0, 0.03, 0]); // Max opacity 0.03 (Very subtle)
 
   // Premium "Masked Reveal" Variants
-  // This animates text sliding up from an overflow-hidden container
   const maskRevealVariants: Variants = {
     hidden: { y: "110%" },
     visible: { 
       y: 0,
-      transition: { duration: 1.1, ease: [0.16, 1, 0.3, 1] } 
+      transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] } 
     }
   };
 
@@ -35,19 +34,19 @@ const WatermarkSection: React.FC = () => {
     visible: {
       transition: {
         staggerChildren: 0.15,
-        delayChildren: 0.1
+        delayChildren: 0.2
       }
     }
   };
 
   return (
-    <section ref={containerRef} className="relative w-full py-32 md:py-56 bg-brand-light overflow-hidden flex items-center justify-center">
+    <section ref={containerRef} className="relative w-full py-32 md:py-56 bg-white overflow-hidden flex items-center justify-center">
       
-      {/* Background Watermark - Floating Effect with Blur */}
+      {/* Background Watermark - Almost invisible texture */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
         <motion.div 
-          style={{ y: bgY, rotate: bgRotate, scale: bgScale, opacity: bgOpacity }}
-          className="w-[100%] max-w-[900px] aspect-square text-brand-dark blur-[1px]"
+          style={{ y: bgY, rotate: bgRotate, opacity: bgOpacity }}
+          className="w-[90%] max-w-[800px] aspect-square text-brand-dark blur-[2px]"
         >
           <LogoIcon className="w-full h-full" fill="currentColor" />
         </motion.div>
@@ -82,18 +81,16 @@ const WatermarkSection: React.FC = () => {
                 </motion.h2>
             </div>
             
-            {/* Cursive Text with "Bloom" animation */}
+            {/* Cursive Text */}
             <div className="mt-2 md:mt-4 relative">
                 <div className="overflow-visible px-4 py-2">
                     <motion.div 
                         variants={{
-                            hidden: { y: 40, opacity: 0, scale: 0.95, filter: "blur(10px)" },
+                            hidden: { y: 30, opacity: 0 },
                             visible: { 
                                 y: 0, 
                                 opacity: 1, 
-                                scale: 1,
-                                filter: "blur(0px)",
-                                transition: { duration: 1.4, ease: "easeOut" } 
+                                transition: { duration: 1.5, ease: "easeOut" } 
                             }
                         }}
                         className="font-cursive text-5xl md:text-8xl text-brand-gold drop-shadow-sm"
@@ -101,14 +98,6 @@ const WatermarkSection: React.FC = () => {
                         spanning over 35 years
                     </motion.div>
                 </div>
-                
-                {/* Decorative Side Lines */}
-                <motion.div 
-                  initial={{ scaleX: 0, opacity: 0 }}
-                  animate={isInView ? { scaleX: 1, opacity: 1 } : { scaleX: 0, opacity: 0 }}
-                  transition={{ duration: 1.5, delay: 0.8, ease: "easeInOut" }}
-                  className="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 md:w-64 h-px bg-gradient-to-r from-transparent via-brand-gold to-transparent opacity-50"
-                />
             </div>
           </div>
 
@@ -128,13 +117,13 @@ const WatermarkSection: React.FC = () => {
              <div className="overflow-hidden">
                  <motion.p 
                     variants={maskRevealVariants}
-                    className="text-xl md:text-2xl text-brand-text/80 font-serif leading-relaxed text-balance"
+                    className="text-xl md:text-2xl text-brand-charcoal/80 font-serif leading-relaxed text-balance"
                  >
                     We operate with the profound understanding that your home is not merely an asset to be managed, but a 
                  </motion.p>
              </div>
              
-             {/* Highlighted text with dedicated underline animation */}
+             {/* Highlighted text */}
              <div className="inline-block relative mt-2 overflow-visible">
                 <div className="overflow-hidden">
                     <motion.span 

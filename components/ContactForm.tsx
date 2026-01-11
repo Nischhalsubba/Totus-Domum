@@ -5,21 +5,22 @@ import { ArrowRight } from 'lucide-react';
 
 const ContactForm: React.FC = () => {
   return (
-    <section className="py-24 md:py-32 bg-brand-light">
+    <section className="py-24 md:py-32 bg-brand-light relative z-20">
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row gap-16">
             
             {/* Left Info */}
-            <div className="md:w-1/3">
-                <motion.h2 
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="font-serif text-4xl md:text-5xl text-brand-dark mb-8"
-                >
+            <motion.div 
+                className="md:w-1/3"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1, ease: "easeOut" }}
+            >
+                <h2 className="font-serif text-4xl md:text-5xl text-brand-dark mb-8">
                     Let's Start the <br/>
                     <span className="font-cursive text-5xl md:text-6xl text-brand-gold">Conversation</span>
-                </motion.h2>
+                </h2>
 
                 <p className="text-gray-500 font-light mb-12 leading-relaxed">
                     Whether you have a specific request or just want to explore how we can support you, I am here to listen.
@@ -35,10 +36,16 @@ const ContactForm: React.FC = () => {
                         <p className="text-gray-600">+356 99 99 1972</p>
                     </div>
                 </div>
-            </div>
+            </motion.div>
 
             {/* Right Form */}
-            <div className="md:w-2/3 bg-white p-10 md:p-16 shadow-sm border border-gray-100">
+            <motion.div 
+                className="md:w-2/3 bg-white p-10 md:p-16 shadow-lg border border-gray-100"
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            >
                 <form className="space-y-12">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                         <div className="relative">
@@ -119,7 +126,7 @@ const ContactForm: React.FC = () => {
                         </motion.div>
                     </motion.button>
                 </form>
-            </div>
+            </motion.div>
         </div>
       </div>
     </section>
