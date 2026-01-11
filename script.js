@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const splitTextToSpans = (selector) => {
         const elements = document.querySelectorAll(selector);
         elements.forEach(el => {
-            const text = el.textContent;
+            const text = el.textContent.trim();
             const words = text.split(' ');
             el.innerHTML = ''; // Clear text
             

@@ -10,7 +10,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Manrope:wght@200;300;400;500;600&family=Pinyon+Script&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Manrope:wght@300;400;500;600&family=Pinyon+Script&display=swap" rel="stylesheet">
     
     <!-- Tailwind CSS (CDN) -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -31,7 +31,7 @@
                 dark: '#0F0F0F',      
                 charcoal: '#1A1A1A',
                 alabaster: '#F5F2EB', 
-                gray: '#8C8C8C'
+                gray: '#525252' // Darkened from #8C8C8C for contrast
               }
             },
             backgroundImage: {
@@ -45,7 +45,7 @@
     <style>
         body {
             background-color: #F5F2EB;
-            color: #0F0F0F;
+            color: #1A1A1A;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             overflow-x: hidden;
@@ -62,14 +62,14 @@
             pointer-events: none; z-index: 9999; mix-blend-mode: difference;
         }
         .cursor-circle {
-            width: 40px; height: 40px; border: 1px solid rgba(176, 141, 85, 0.5);
+            width: 40px; height: 40px; border: 1px solid rgba(176, 141, 85, 0.8);
             position: fixed; top: 0; left: 0; border-radius: 50%;
             pointer-events: none; z-index: 9999; transition: transform 0.1s ease-out;
         }
         
         /* Utility Classes for GSAP */
         .char-wrap { display: inline-block; overflow: hidden; vertical-align: bottom; }
-        .word-wrap { display: inline-block; overflow: hidden; vertical-align: bottom; margin-right: 0.2em; }
+        .word-wrap { display: inline-block; overflow: hidden; vertical-align: bottom; margin-right: 0.25em; }
         .img-parallax { will-change: transform; }
         
         /* Noise Overlay */
@@ -97,13 +97,27 @@
     
     <div class="noise-overlay"></div>
 
-    <!-- SVG DEFS (Hidden) -->
+    <!-- SVG DEFS (Hidden) - CORRECT LOGO PATHS RESTORED -->
     <svg style="display: none;">
         <symbol id="logo-icon" viewBox="0 0 555 537">
-            <path d="M260,20 L295,20 L295,40 L260,40 Z M277,100 L277,400" fill="currentColor" />
-            <path d="M200,150 Q277,100 354,150" fill="none" stroke="currentColor" stroke-width="20" />
-            <circle cx="277" cy="250" r="180" fill="none" stroke="currentColor" stroke-width="15" />
-            <path d="M150,450 L400,450" stroke="currentColor" stroke-width="10" />
+             <g transform="matrix(1,0,0,1,-6598.542023,-1842.968333)">
+                <g transform="matrix(4.166667,0,0,4.166667,5593.921606,19)">
+                    <g id="Icon-Only" transform="matrix(1,0,0,1,0.3586,318.96)">
+                        <g transform="matrix(1,0,0,1,350.9785,207.2556)">
+                            <path d="M0,-8.639C-8.941,2.375 -27.949,9.917 -36.14,21.969C-34.884,8.425 -32.963,2.308 -27.652,-4.354C-23.723,-9.286 -18.463,-13.284 -14.953,-18.201C-16.9,-12.487 -30.361,3.427 -14.652,-1.041C-19.232,-2.574 -17.814,-4.489 -14.42,-10.994C-11.801,-16.013 -9.451,-21.935 -11.443,-27.867C-13.623,-22.524 -26.258,-13.72 -31.135,-7.817C-42.747,6.241 -42.067,24.315 -42.896,40.209C-32.416,18.779 -10.607,11.66 3.002,-4.415C13.074,-16.312 14.4,-35.428 22.834,-46.702C13.113,-44.635 7.977,-18.465 0,-8.639M10.318,-47.51C-1.473,-46.609 -5.176,-27.088 -8.936,-19.084C-1.316,-23.637 2.41,-44.594 10.318,-47.51M-11.537,-6.78C-2.865,-9.588 3.021,-48.723 19.422,-48.848C6.629,-43.273 2.293,-5.496 -11.537,-6.78" fill="currentColor"/>
+                        </g>
+                        <g transform="matrix(1,0,0,1,275.0283,226.4831)">
+                            <path d="M0,-47.094C-1.994,-41.162 0.357,-35.24 2.976,-30.222C6.371,-23.716 7.789,-21.801 3.208,-20.269C18.917,-15.8 5.457,-31.714 3.509,-37.428C7.018,-32.511 12.278,-28.514 16.209,-23.581C21.519,-16.919 23.439,-10.802 24.695,2.742C16.505,-9.311 -2.503,-16.853 -11.443,-27.866C-19.42,-37.693 -24.558,-63.863 -34.278,-65.929C-25.844,-54.656 -24.518,-35.539 -14.447,-23.643C-0.837,-7.568 20.972,-0.448 31.452,20.981C30.623,5.088 31.303,-12.987 19.69,-27.044C14.814,-32.948 2.18,-41.751 0,-47.094M0.094,-26.007C-8.579,-28.816 -14.465,-67.95 -30.867,-68.075C-18.072,-62.5 -13.738,-24.724 0.094,-26.007M-21.762,-66.738C-9.971,-65.836 -6.268,-46.316 -2.508,-38.312C-10.127,-42.865 -13.854,-63.822 -21.762,-66.738" fill="currentColor"/>
+                        </g>
+                        <g transform="matrix(1,0,0,1,0,-856.317)">
+                            <path d="M295.623,1027.59L305.986,1027.59L305.986,1017.227L295.623,1017.227L295.623,1027.59ZM308.576,1027.59L318.939,1027.59L318.939,1017.227L308.576,1017.227L308.576,1027.59ZM308.576,1014.4L318.939,1014.4L318.939,1004.037L308.576,1004.037L308.576,1014.4ZM295.623,1004.037L305.986,1004.037L305.986,1014.4L295.623,1014.4L295.623,1004.037Z" fill="currentColor"/>
+                        </g>
+                        <g transform="matrix(1,0,0,1,334.6895,163.2194)">
+                            <path d="M0,6.283C-3.135,13.024 -6.312,15.143 -12.025,20.186C-18.756,26.13 -23.69,30.943 -27.408,37.365C-31.125,30.943 -36.06,26.13 -42.792,20.186C-48.429,15.21 -51.697,12.977 -54.816,6.282L-54.816,-14.981L-59.973,-11.729L-59.973,7.389C-56.271,15.87 -52.87,18.168 -46.205,24.053C-36.752,32.398 -31.123,38.008 -27.408,50.71C-23.693,38.008 -18.064,32.398 -8.611,24.053C-1.883,18.111 1.457,15.863 5.156,7.389L5.156,-11.729L0,-14.981L0,6.283ZM-27.408,-44.427L20.756,-14.059L9.922,-14.059L-27.408,-37.595L-64.738,-14.059L-75.572,-14.059L-27.408,-44.427Z" fill="currentColor"/>
+                        </g>
+                    </g>
+                </g>
+            </g>
         </symbol>
     </svg>
 
@@ -114,10 +128,10 @@
     <!-- PRELOADER -->
     <div id="preloader" class="fixed inset-0 z-[100] bg-[#0F0F0F] flex flex-col items-center justify-center">
         <div class="flex flex-col items-center">
-            <svg class="w-16 h-16 text-brand-gold mb-6 opacity-0" id="preloader-logo">
+            <svg class="w-20 h-20 text-brand-gold mb-8 opacity-0" id="preloader-logo">
                 <use href="#logo-icon"></use>
             </svg>
-            <span id="preloader-text" class="font-serif text-xl tracking-[0.2em] uppercase text-brand-alabaster opacity-0">Totus Domum</span>
+            <span id="preloader-text" class="font-serif text-2xl tracking-[0.2em] uppercase text-brand-alabaster opacity-0">Totus Domum</span>
             <div class="w-64 h-[1px] bg-white/10 mt-8 relative overflow-hidden">
                 <div id="preloader-bar" class="absolute top-0 left-0 h-full bg-brand-gold w-0"></div>
             </div>
@@ -127,8 +141,8 @@
     <!-- NAVIGATION -->
     <nav class="fixed top-0 w-full z-50 py-8 mix-blend-difference text-white transition-transform duration-500" id="navbar">
         <div class="container mx-auto px-6 flex justify-between items-center">
-            <a href="#" class="flex items-center gap-3 cursor-interactive group">
-                <svg class="w-8 h-8 text-white group-hover:text-brand-gold transition-colors"><use href="#logo-icon"></use></svg>
+            <a href="#" class="flex items-center gap-4 cursor-interactive group">
+                <svg class="w-10 h-10 text-white group-hover:text-brand-gold transition-colors"><use href="#logo-icon"></use></svg>
                 <div class="flex flex-col">
                     <span class="font-serif text-xl tracking-wide uppercase leading-none">Totus Domum</span>
                 </div>
@@ -138,40 +152,45 @@
                 <a href="#hero" class="cursor-interactive text-[11px] uppercase tracking-[0.2em] font-bold hover:text-brand-gold transition-colors">Home</a>
                 <a href="#philosophy" class="cursor-interactive text-[11px] uppercase tracking-[0.2em] font-bold hover:text-brand-gold transition-colors">Philosophy</a>
                 <a href="#services" class="cursor-interactive text-[11px] uppercase tracking-[0.2em] font-bold hover:text-brand-gold transition-colors">Services</a>
-                <a href="#contact" class="cursor-interactive px-6 py-3 border border-white/30 text-[10px] uppercase tracking-[0.2em] font-bold hover:bg-brand-gold hover:border-brand-gold transition-all">Inquire</a>
+                <a href="#contact" class="cursor-interactive px-6 py-3 border border-white/30 text-[10px] uppercase tracking-[0.2em] font-bold hover:bg-brand-gold hover:border-brand-gold hover:text-white transition-all">Inquire</a>
             </div>
         </div>
     </nav>
 
     <!-- HERO SECTION -->
     <section id="hero" class="relative h-screen w-full overflow-hidden bg-[#0F0F0F]">
-        <div class="absolute inset-0 z-0 opacity-60">
+        <div class="absolute inset-0 z-0">
+             <!-- Increased background darkness for better text contrast -->
+            <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/60 z-10"></div>
             <img 
                 id="hero-img"
                 src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=2574&auto=format&fit=crop" 
                 alt="Luxury Interior" 
-                class="w-full h-full object-cover scale-110 img-parallax"
+                class="w-full h-full object-cover scale-110 img-parallax opacity-70"
             />
         </div>
 
         <div class="relative z-10 h-full flex flex-col justify-center container mx-auto px-6 md:px-24">
-            <div class="max-w-5xl">
-                <div class="flex items-center gap-4 mb-6 reveal-stagger">
+            <div class="max-w-6xl">
+                <div class="flex items-center gap-4 mb-8 reveal-stagger">
                     <span class="h-px w-12 bg-brand-gold"></span>
-                    <span class="text-xs font-bold tracking-[0.3em] uppercase text-brand-gold">Bespoke Concierge</span>
+                    <span class="text-xs font-bold tracking-[0.3em] uppercase text-brand-gold drop-shadow-md">Bespoke Concierge</span>
                 </div>
 
-                <h1 class="font-serif text-6xl md:text-[7vw] leading-[0.9] text-brand-alabaster mb-2 mix-blend-overlay split-text">
-                    THE ART OF
-                </h1>
-                <div class="pl-12 md:pl-[8vw]">
-                     <h1 class="font-cursive text-7xl md:text-[8vw] text-brand-gold reveal-slide-up">
-                        Seamless Living
-                     </h1>
+                <!-- Revised Type Scaling -->
+                <div class="relative">
+                    <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl leading-[1.1] text-brand-alabaster mb-2 split-text drop-shadow-lg">
+                        THE ART OF
+                    </h1>
+                    <div class="pl-0 md:pl-24 mt-2">
+                         <h1 class="font-cursive text-6xl md:text-8xl lg:text-9xl text-brand-gold reveal-slide-up drop-shadow-md">
+                            Seamless Living
+                         </h1>
+                    </div>
                 </div>
 
-                <div class="mt-16 max-w-lg ml-auto md:mr-32 reveal-stagger">
-                    <p class="font-sans text-lg text-brand-alabaster/80 font-light leading-relaxed mb-8">
+                <div class="mt-12 max-w-lg ml-auto md:mr-32 reveal-stagger">
+                    <p class="font-sans text-base md:text-lg text-brand-alabaster font-normal leading-relaxed mb-8 drop-shadow-md">
                         Discrete bespoke services for estates in Zurich, Paris, and Malta. We operate with empathy and sound business judgment.
                     </p>
                     <button class="cursor-interactive flex items-center gap-4 text-xs font-bold uppercase tracking-[0.2em] text-white hover:text-brand-gold transition-colors">
@@ -183,27 +202,27 @@
     </section>
 
     <!-- PHILOSOPHY SECTION -->
-    <section id="philosophy" class="py-32 md:py-48 bg-[#FAFAFA] relative overflow-hidden">
+    <section id="philosophy" class="py-24 md:py-40 bg-[#FAFAFA] relative overflow-hidden">
         <div class="container mx-auto px-6 relative z-10">
             <div class="flex flex-col items-center text-center">
                 <span class="text-[10px] uppercase tracking-[0.4em] text-brand-gold font-bold mb-8 reveal-text">The Standard</span>
                 
-                <h2 class="font-serif text-5xl md:text-8xl text-brand-dark leading-[0.9] mb-4 split-text">
+                <h2 class="font-serif text-4xl md:text-7xl lg:text-8xl text-brand-dark leading-[1.0] mb-4 split-text">
                     Excellence in
                 </h2>
-                <h2 class="font-cursive text-6xl md:text-9xl text-brand-gold mb-16 reveal-slide-up">
+                <h2 class="font-cursive text-5xl md:text-8xl lg:text-9xl text-brand-gold mb-16 reveal-slide-up">
                     Every Detail
                 </h2>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-32 max-w-6xl mx-auto text-left items-start mt-12">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 max-w-5xl mx-auto text-left items-start mt-8">
                     <div class="reveal-fade-up">
                         <h3 class="font-sans text-xs font-bold uppercase tracking-widest text-brand-gray mb-6">Our Promise</h3>
-                        <p class="font-serif text-3xl md:text-4xl text-brand-dark leading-tight">
+                        <p class="font-serif text-2xl md:text-3xl text-brand-dark leading-tight">
                             We bridge the gap between <span class="italic text-brand-gold">complex demands</span> and seamless living.
                         </p>
                     </div>
                     <div class="reveal-fade-up delay-100">
-                        <p class="text-brand-charcoal/70 font-light leading-relaxed text-lg">
+                        <p class="text-brand-gray font-normal leading-relaxed text-base md:text-lg">
                             From managing global property portfolios to coordinating executive schedules, we handle the arduous tasks with empathy. Your home is not just an asset, it is a sanctuary.
                         </p>
                         <div class="h-px w-full bg-brand-dark/10 mt-8"></div>
@@ -224,13 +243,13 @@
             </div>
 
             <!-- The Track -->
-            <div class="services-track flex items-center gap-12 md:gap-24 px-6 md:px-24 w-max h-full pt-32 pb-12">
+            <div class="services-track flex items-center gap-8 md:gap-24 px-6 md:px-24 w-max h-full pt-32 pb-12">
                 
                 <!-- Spacer -->
-                <div class="w-[10vw] md:w-[25vw] shrink-0"></div>
+                <div class="w-[5vw] md:w-[25vw] shrink-0"></div>
 
                 <!-- Card 1 -->
-                <div class="service-card w-[80vw] md:w-[45vw] lg:w-[35vw] h-[60vh] relative flex flex-col group shrink-0">
+                <div class="service-card w-[85vw] md:w-[45vw] lg:w-[35vw] h-[60vh] relative flex flex-col group shrink-0">
                     <div class="w-full h-full relative overflow-hidden bg-gray-900 border border-white/10">
                         <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2000" class="w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-105" alt="Service 1">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent"></div>
@@ -238,12 +257,12 @@
                     <div class="absolute bottom-0 left-0 w-full p-8 md:p-12">
                         <span class="text-brand-gold font-mono text-xl mb-4 block">01</span>
                         <h3 class="font-serif text-3xl md:text-4xl mb-4 text-white">Residence Management</h3>
-                        <p class="font-sans text-brand-alabaster/70 font-light text-sm md:text-base max-w-sm">Ensuring your home is secure, clean, and fully ready.</p>
+                        <p class="font-sans text-brand-alabaster/80 font-normal text-sm md:text-base max-w-sm">Ensuring your home is secure, clean, and fully ready.</p>
                     </div>
                 </div>
 
                 <!-- Card 2 -->
-                <div class="service-card w-[80vw] md:w-[45vw] lg:w-[35vw] h-[60vh] relative flex flex-col group shrink-0">
+                <div class="service-card w-[85vw] md:w-[45vw] lg:w-[35vw] h-[60vh] relative flex flex-col group shrink-0">
                     <div class="w-full h-full relative overflow-hidden bg-gray-900 border border-white/10">
                         <img src="https://images.unsplash.com/photo-1556910103-1c02745a30bf?q=80&w=2000" class="w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-105" alt="Service 2">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent"></div>
@@ -251,12 +270,12 @@
                     <div class="absolute bottom-0 left-0 w-full p-8 md:p-12">
                         <span class="text-brand-gold font-mono text-xl mb-4 block">02</span>
                         <h3 class="font-serif text-3xl md:text-4xl mb-4 text-white">Lifestyle Support</h3>
-                        <p class="font-sans text-brand-alabaster/70 font-light text-sm md:text-base max-w-sm">Organizing schedules and handling complex tasks.</p>
+                        <p class="font-sans text-brand-alabaster/80 font-normal text-sm md:text-base max-w-sm">Organizing schedules and handling complex tasks.</p>
                     </div>
                 </div>
 
                 <!-- Card 3 -->
-                <div class="service-card w-[80vw] md:w-[45vw] lg:w-[35vw] h-[60vh] relative flex flex-col group shrink-0">
+                <div class="service-card w-[85vw] md:w-[45vw] lg:w-[35vw] h-[60vh] relative flex flex-col group shrink-0">
                     <div class="w-full h-full relative overflow-hidden bg-gray-900 border border-white/10">
                         <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=2000" class="w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-105" alt="Service 3">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent"></div>
@@ -264,7 +283,7 @@
                     <div class="absolute bottom-0 left-0 w-full p-8 md:p-12">
                         <span class="text-brand-gold font-mono text-xl mb-4 block">03</span>
                         <h3 class="font-serif text-3xl md:text-4xl mb-4 text-white">Property Search</h3>
-                        <p class="font-sans text-brand-alabaster/70 font-light text-sm md:text-base max-w-sm">Finding the perfect new home for your needs.</p>
+                        <p class="font-sans text-brand-alabaster/80 font-normal text-sm md:text-base max-w-sm">Finding the perfect new home for your needs.</p>
                     </div>
                 </div>
                 
@@ -302,7 +321,7 @@
 
                 <div class="h-24 w-px bg-brand-dark/20 mx-auto my-8 origin-top reveal-line"></div>
                 
-                <p class="text-xl md:text-3xl text-brand-charcoal/80 font-serif leading-relaxed reveal-fade-up">
+                <p class="text-xl md:text-3xl text-brand-gray font-serif leading-relaxed reveal-fade-up">
                     We operate with the profound understanding that your home is not merely an asset to be managed, but a 
                     <span class="text-brand-dark italic border-b border-brand-gold">legacy to be preserved.</span>
                 </p>
@@ -321,27 +340,27 @@
                 <div class="space-y-8 mt-12">
                     <div>
                         <h4 class="font-serif text-lg text-brand-dark mb-2">Email</h4>
-                        <a href="mailto:info@totusdomum.com" class="text-brand-gold border-b border-brand-gold/30 hover:border-brand-gold cursor-interactive">info@totusdomum.com</a>
+                        <a href="mailto:info@totusdomum.com" class="text-brand-gray hover:text-brand-gold border-b border-brand-gold/30 hover:border-brand-gold cursor-interactive transition-colors">info@totusdomum.com</a>
                     </div>
                     <div>
                         <h4 class="font-serif text-lg text-brand-dark mb-2">Office</h4>
-                        <p class="text-gray-500 font-light">Valletta, Malta</p>
+                        <p class="text-brand-gray font-normal">Valletta, Malta</p>
                     </div>
                 </div>
             </div>
             
-            <div class="md:w-2/3 bg-white p-10 md:p-16 shadow-2xl border border-gray-100 reveal-fade-left">
+            <div class="md:w-2/3 bg-white p-8 md:p-16 shadow-2xl border border-gray-100 reveal-fade-left">
                 <form class="space-y-12">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div class="relative">
-                            <input type="text" placeholder="Name" class="w-full border-b border-gray-300 py-3 focus:border-brand-gold outline-none bg-transparent">
+                            <input type="text" placeholder="Name" class="w-full border-b border-gray-300 py-3 focus:border-brand-gold outline-none bg-transparent text-brand-dark placeholder-gray-400">
                         </div>
                         <div class="relative">
-                            <input type="email" placeholder="Email" class="w-full border-b border-gray-300 py-3 focus:border-brand-gold outline-none bg-transparent">
+                            <input type="email" placeholder="Email" class="w-full border-b border-gray-300 py-3 focus:border-brand-gold outline-none bg-transparent text-brand-dark placeholder-gray-400">
                         </div>
                     </div>
                     <div class="relative">
-                        <textarea placeholder="How can we help?" rows="3" class="w-full border-b border-gray-300 py-3 focus:border-brand-gold outline-none bg-transparent resize-none"></textarea>
+                        <textarea placeholder="How can we help?" rows="3" class="w-full border-b border-gray-300 py-3 focus:border-brand-gold outline-none bg-transparent resize-none text-brand-dark placeholder-gray-400"></textarea>
                     </div>
                     <button type="button" class="bg-brand-gold text-white px-10 py-5 uppercase text-[10px] tracking-[0.25em] font-bold hover:bg-brand-dark transition-colors cursor-interactive w-full md:w-auto">
                         Submit Request
@@ -357,10 +376,10 @@
             <div class="flex flex-col md:flex-row justify-between items-start mb-16">
                 <div>
                     <div class="flex items-center gap-3 mb-6">
-                        <svg class="w-6 h-6 text-brand-gold"><use href="#logo-icon"></use></svg>
+                        <svg class="w-8 h-8 text-brand-gold"><use href="#logo-icon"></use></svg>
                         <h3 class="font-serif text-2xl">Totus Domum</h3>
                     </div>
-                    <p class="text-gray-400 text-sm max-w-xs font-light">The premier lifestyle service for Malta's most discerning residents.</p>
+                    <p class="text-gray-400 text-sm max-w-xs font-normal">The premier lifestyle service for Malta's most discerning residents.</p>
                 </div>
                 <div class="flex gap-12 mt-12 md:mt-0">
                     <div class="flex flex-col gap-4">
