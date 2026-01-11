@@ -1,16 +1,12 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     
-    // 1. Initialize Smooth Scroll (Lenis)
+    // 1. Initialize Lenis (Smooth Scroll)
     const lenis = new Lenis({
-        duration: 1.2,
+        duration: 1.5,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         direction: 'vertical',
-        gestureDirection: 'vertical',
         smooth: true,
-        mouseMultiplier: 1,
-        smoothTouch: false,
-        touchMultiplier: 2,
     });
 
     function raf(time) {
@@ -19,71 +15,183 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     requestAnimationFrame(raf);
 
-    // Connect Lenis to ScrollTrigger
+    // Register GSAP ScrollTrigger
     gsap.registerPlugin(ScrollTrigger);
 
-    // 2. Preloader Animation
+    // 2. Helper: Split Text Logic (Simulates SplitText Plugin)
+    const splitTextToSpans = (selector) => {
+        const elements = document.querySelectorAll(selector);
+        elements.forEach(el => {
+            const text = el.textContent;
+            const words = text.split(' ');
+            el.innerHTML = ''; // Clear text
+            
+            words.forEach(word => {
+                const wordSpan = document.createElement('span');
+                wordSpan.classList.add('word-wrap');
+                
+                // Wrap word in an overflow-hidden span for reveal effect
+                const innerSpan = document.createElement('span');
+                innerSpan.classList.add('char-wrap');
+                innerSpan.textContent = word;
+                innerSpan.style.display = 'inline-block';
+                innerSpan.style.transform = 'translateY(100%)'; // Start hidden
+                
+                wordSpan.appendChild(innerSpan);
+                el.appendChild(wordSpan);
+                el.appendChild(document.createTextNode(' ')); // Space
+            });
+        });
+    };
+
+    // Apply split text
+    splitTextToSpans('.split-text');
+
+    // 3. Preloader Sequence
     const preloaderTl = gsap.timeline({
         onComplete: () => {
+            // Remove Preloader
             gsap.to('#preloader', {
-                opacity: 0,
-                duration: 0.8,
-                pointerEvents: 'none',
+                yPercent: -100,
+                duration: 1,
+                ease: "power4.inOut",
                 onComplete: () => {
-                    document.body.classList.remove('overflow-hidden');
-                    // Start Hero Animations
-                    startHeroAnimations();
+                    initHeroAnimations();
+                    document.body.classList.remove('opacity-0');
+                    document.body.style.cursor = 'none';
                 }
             });
         }
     });
 
-    // Make body visible (but preloader covers it)
-    gsap.set('body', { opacity: 1 });
-
+    gsap.set('body', { opacity: 1 }); // Reveal body behind preloader
     preloaderTl
-        .to('#preloader-logo', { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" })
-        .to('#preloader-text', { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, "-=0.4")
-        .to('#preloader-bar', { width: "100%", duration: 2.5, ease: "power1.inOut" });
+        .to('#preloader-logo', { opacity: 1, y: 0, duration: 1 })
+        .to('#preloader-text', { opacity: 1, y: 0, duration: 0.8 }, "-=0.5")
+        .to('#preloader-bar', { width: "100%", duration: 1.5, ease: "expo.inOut" })
+        .to('#preloader', { delay: 0.2 }); // Pause briefly
 
-    // 3. Hero Animations
-    function startHeroAnimations() {
-        const heroTl = gsap.timeline();
+    // 4. Hero Animations
+    function initHeroAnimations() {
+        const tl = gsap.timeline();
         
-        heroTl
-            .to('#hero-img', { scale: 1, duration: 2.5, ease: "power2.out" })
-            .to('.hero-anim', { opacity: 1, y: 0, duration: 1, stagger: 0.1 }, "-=2")
-            .to('.hero-title', { opacity: 1, y: 0, duration: 1.2, ease: "power3.out" }, "-=1.8")
-            .to('.hero-cursive', { opacity: 1, y: 0, rotate: 0, duration: 1.4, ease: "power3.out" }, "-=1.6")
-            .to('.hero-desc', { opacity: 1, y: 0, duration: 1, ease: "power2.out" }, "-=1.2");
-    }
-
-    // 4. Horizontal Scroll (Services Section)
-    const servicesSection = document.getElementById('services');
-    const servicesTrack = document.getElementById('services-track');
-    
-    // Calculate total scroll amount needed
-    // We scroll the width of the track minus the viewport width
-    
-    if (servicesSection && servicesTrack) {
-        let scrollAmount = () => -(servicesTrack.scrollWidth - window.innerWidth);
-        
-        // Horizontal Scroll Animation
-        gsap.to(servicesTrack, {
-            x: scrollAmount,
+        // Parallax Image
+        gsap.to('#hero-img', {
+            yPercent: 30,
             ease: "none",
             scrollTrigger: {
-                trigger: servicesSection,
+                trigger: '#hero',
                 start: "top top",
-                end: () => "+=" + (servicesTrack.scrollWidth - window.innerWidth), // Scroll length = horizontal width
-                pin: true,
-                scrub: 1,
-                invalidateOnRefresh: true,
+                end: "bottom top",
+                scrub: true
             }
         });
 
-        // Fade out header text in services
-        gsap.to('.fade-out-on-scroll', {
+        // Text Reveals
+        tl.to('#hero .char-wrap', {
+            y: 0,
+            duration: 1.2,
+            stagger: 0.05,
+            ease: "power4.out"
+        })
+        .from('.reveal-slide-up', {
+            y: 100,
+            opacity: 0,
+            duration: 1.2,
+            ease: "power3.out"
+        }, "-=1")
+        .from('.reveal-stagger', {
+            y: 30,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.1,
+            ease: "power2.out"
+        }, "-=0.8");
+    }
+
+    // 5. Global Scroll Reveals
+    // Text Split Reveals
+    document.querySelectorAll('.split-text').forEach(el => {
+        gsap.to(el.querySelectorAll('.char-wrap'), {
+            y: 0,
+            duration: 1,
+            stagger: 0.05,
+            ease: "power3.out",
+            scrollTrigger: {
+                trigger: el,
+                start: "top 85%"
+            }
+        });
+    });
+
+    // Fade Up Elements
+    gsap.utils.toArray('.reveal-fade-up').forEach(el => {
+        gsap.from(el, {
+            y: 50,
+            opacity: 0,
+            duration: 1,
+            ease: "power2.out",
+            scrollTrigger: {
+                trigger: el,
+                start: "top 90%"
+            }
+        });
+    });
+
+    // Slide Up (Cursive)
+    gsap.utils.toArray('.reveal-slide-up:not(#hero *)').forEach(el => {
+        gsap.from(el, {
+            y: 100,
+            opacity: 0,
+            rotate: 5,
+            duration: 1.2,
+            ease: "power3.out",
+            scrollTrigger: {
+                trigger: el,
+                start: "top 85%"
+            }
+        });
+    });
+
+    // Line Growth
+    gsap.utils.toArray('.reveal-line').forEach(el => {
+        gsap.from(el, {
+            scaleY: 0,
+            duration: 1.5,
+            ease: "power3.inOut",
+            scrollTrigger: {
+                trigger: el,
+                start: "top 85%"
+            }
+        });
+    });
+
+    // 6. Services Horizontal Scroll
+    const servicesSection = document.querySelector('#services');
+    const track = document.querySelector('.services-track');
+    
+    if (servicesSection && track) {
+        // Calculate the distance to scroll
+        // Track width - Viewport width
+        const getScrollAmount = () => -(track.scrollWidth - window.innerWidth);
+
+        const tween = gsap.to(track, {
+            x: getScrollAmount,
+            ease: "none",
+        });
+
+        ScrollTrigger.create({
+            trigger: servicesSection,
+            start: "top top",
+            end: () => `+=${track.scrollWidth - window.innerWidth}`,
+            pin: true,
+            animation: tween,
+            scrub: 1,
+            invalidateOnRefresh: true,
+        });
+
+        // Fade out intro text
+        gsap.to('.services-intro', {
             opacity: 0,
             scrollTrigger: {
                 trigger: servicesSection,
@@ -94,45 +202,56 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 5. General Scroll Reveal (Fade Up)
-    const revealElements = document.querySelectorAll('.scroll-reveal');
-    revealElements.forEach(el => {
-        gsap.to(el, {
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            ease: "power3.out",
-            scrollTrigger: {
-                trigger: el,
-                start: "top 85%", // Start when top of element hits 85% of viewport height
-                toggleActions: "play none none reverse"
-            }
-        });
-    });
-
-    // 6. Vertical Line Growth
-    gsap.to('.line-grow', {
-        height: '5rem', // 80px equivalent
-        duration: 1.5,
+    // 7. Watermark Parallax & Rotation
+    gsap.to('#watermark-bg', {
+        rotation: 45,
+        y: 100,
+        opacity: 0.08,
+        ease: "none",
         scrollTrigger: {
-            trigger: '.line-grow',
-            start: "top 80%",
+            trigger: '#heritage',
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1
         }
     });
 
-    // 7. Custom Cursor Logic
+    // 8. Custom Cursor
     const cursorDot = document.querySelector('.cursor-dot');
     const cursorCircle = document.querySelector('.cursor-circle');
+    
+    let mouseX = 0;
+    let mouseY = 0;
+    let cursorX = 0;
+    let cursorY = 0;
 
     window.addEventListener('mousemove', (e) => {
-        gsap.to(cursorDot, { x: e.clientX, y: e.clientY, duration: 0.1, ease: "power2.out" });
-        gsap.to(cursorCircle, { x: e.clientX, y: e.clientY, duration: 0.4, ease: "power2.out" });
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        
+        // Immediate dot movement
+        gsap.to(cursorDot, { x: mouseX - 4, y: mouseY - 4, duration: 0 });
     });
 
-    // Hover effect for interactive elements
-    const interactives = document.querySelectorAll('.cursor-interactive, a, button');
-    interactives.forEach(el => {
-        el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
-        el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
+    // Smooth circle movement loop
+    function animateCursor() {
+        const dt = 1.0 - Math.pow(1.0 - 0.2, gsap.ticker.deltaRatio());
+        cursorX += (mouseX - cursorX) * dt;
+        cursorY += (mouseY - cursorY) * dt;
+        
+        gsap.set(cursorCircle, { x: cursorX - 20, y: cursorY - 20 });
+        requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    // Hover interactions
+    const interactiveElements = document.querySelectorAll('.cursor-interactive, a, button');
+    interactiveElements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            gsap.to(cursorCircle, { scale: 1.5, opacity: 0.5, backgroundColor: 'rgba(176, 141, 85, 0.1)' });
+        });
+        el.addEventListener('mouseleave', () => {
+            gsap.to(cursorCircle, { scale: 1, opacity: 1, backgroundColor: 'transparent' });
+        });
     });
 });
