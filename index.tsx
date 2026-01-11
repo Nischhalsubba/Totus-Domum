@@ -1,3 +1,14 @@
-// This project has been converted to static HTML/JS. 
-// See index.html for the complete code.
-console.log("Static site mode enabled. Open index.html directly.");
+
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+import App from './App';
+
+const container = document.getElementById('root');
+if (container) {
+  const root = createRoot(container);
+  root.render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  );
+}
