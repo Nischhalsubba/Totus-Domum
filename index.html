@@ -4,13 +4,14 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Totus Domum - Bespoke Residence Management" />
-    <title>Totus Domum | Bespoke Residence Management</title>
+    <meta name="description" content="Totus Domum - Premier Estate & Lifestyle Management in Malta. Bespoke concierge services for ultra-high-net-worth individuals." />
+    <meta name="keywords" content="Luxury Concierge Malta, Estate Management, Property Search, Lifestyle Management, UHNW Services" />
+    <title>Totus Domum | The Invisible Art of Living</title>
     
-    <!-- Fonts -->
+    <!-- Fonts: Cormorant Garamond (Serif) & Montserrat (Sans) for modern luxury -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Manrope:wght@300;400;500;600&family=Pinyon+Script&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@200;300;400;500;600&family=Pinyon+Script&display=swap" rel="stylesheet">
     
     <!-- Tailwind CSS (CDN) -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -21,17 +22,18 @@
         theme: {
           extend: {
             fontFamily: {
-              serif: ['"Playfair Display"', 'serif'],
-              sans: ['"Manrope"', 'sans-serif'],
+              serif: ['"Cormorant Garamond"', 'serif'],
+              sans: ['"Montserrat"', 'sans-serif'],
               cursive: ['"Pinyon Script"', 'cursive'],
             },
             colors: {
               brand: {
-                gold: '#B08D55',
-                dark: '#0F0F0F',      
-                charcoal: '#1A1A1A',
-                alabaster: '#F5F2EB', 
-                gray: '#525252' 
+                gold: '#C6A87C',      // AA Compliant on dark backgrounds
+                goldDark: '#997B4D',  // AA Compliant on light backgrounds
+                dark: '#0A0A0A',      // Deepest Black
+                charcoal: '#1C1C1C',  // Off-black for cards/sections
+                alabaster: '#F2F0E9', // Warm white base
+                gray: '#525252'       // Accessible gray text
               }
             },
             backgroundImage: {
@@ -44,8 +46,8 @@
 
     <style>
         body {
-            background-color: #F5F2EB;
-            color: #1A1A1A;
+            background-color: #F2F0E9;
+            color: #0A0A0A;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             overflow-x: hidden;
@@ -57,12 +59,12 @@
         
         /* Custom Cursor */
         .cursor-dot {
-            width: 8px; height: 8px; background-color: #B08D55;
+            width: 8px; height: 8px; background-color: #C6A87C;
             position: fixed; top: 0; left: 0; border-radius: 50%;
             pointer-events: none; z-index: 9999; mix-blend-mode: difference;
         }
         .cursor-circle {
-            width: 40px; height: 40px; border: 1px solid rgba(176, 141, 85, 0.8);
+            width: 40px; height: 40px; border: 1px solid rgba(198, 168, 124, 0.5);
             position: fixed; top: 0; left: 0; border-radius: 50%;
             pointer-events: none; z-index: 9999; transition: transform 0.1s ease-out;
         }
@@ -72,16 +74,17 @@
         .word-wrap { display: inline-block; overflow: hidden; vertical-align: bottom; margin-right: 0.25em; }
         .img-parallax { will-change: transform; }
         
-        /* Dropdown Menu Animation */
+        /* Navigation Hover Effects */
+        .nav-link::after {
+            content: ''; display: block; width: 0; height: 1px; background: #C6A87C; transition: width 0.3s;
+        }
+        .nav-link:hover::after { width: 100%; }
+        
+        /* Dropdown Visibility */
         .group:hover .group-hover\:visible { visibility: visible; }
         .group:hover .group-hover\:opacity-100 { opacity: 1; }
-        
-        /* Noise Overlay */
-        .noise-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none; z-index: 50;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
-        }
+        .group:hover .group-hover\:translate-y-0 { transform: translateY(0) translateX(-50%); }
+
     </style>
 <script type="importmap">
 {
@@ -99,9 +102,7 @@
 </head>
 <body class="antialiased opacity-0"> 
     
-    <div class="noise-overlay"></div>
-
-    <!-- SVG DEFS (Hidden) - CORRECT LOGO PATHS RESTORED -->
+    <!-- SVG DEFS (Hidden) -->
     <svg style="display: none;">
         <symbol id="logo-icon" viewBox="0 0 555 537">
              <g transform="matrix(1,0,0,1,-6598.542023,-1842.968333)">
@@ -130,59 +131,67 @@
     <div class="cursor-circle"></div>
 
     <!-- PRELOADER -->
-    <div id="preloader" class="fixed inset-0 z-[100] bg-[#0F0F0F] flex flex-col items-center justify-center">
+    <div id="preloader" class="fixed inset-0 z-[100] bg-[#0A0A0A] flex flex-col items-center justify-center">
         <div class="flex flex-col items-center">
-            <svg class="w-20 h-20 text-brand-gold mb-8 opacity-0" id="preloader-logo">
+            <svg class="w-16 h-16 md:w-20 md:h-20 text-brand-gold mb-8 opacity-0" id="preloader-logo">
                 <use href="#logo-icon"></use>
             </svg>
-            <span id="preloader-text" class="font-serif text-2xl tracking-[0.2em] uppercase text-brand-alabaster opacity-0">Totus Domum</span>
+            <span id="preloader-text" class="font-serif text-xl tracking-[0.2em] uppercase text-brand-alabaster opacity-0">Totus Domum</span>
             <div class="w-64 h-[1px] bg-white/10 mt-8 relative overflow-hidden">
                 <div id="preloader-bar" class="absolute top-0 left-0 h-full bg-brand-gold w-0"></div>
             </div>
+            <span class="mt-4 text-[9px] uppercase tracking-[0.3em] text-white/30" id="preloader-sub">Loading Experience</span>
         </div>
     </div>
 
     <!-- NAVIGATION -->
-    <nav class="fixed top-0 w-full z-50 py-8 mix-blend-difference text-white transition-transform duration-500" id="navbar">
-        <div class="container mx-auto px-6 flex justify-between items-center">
-            <a href="#" data-link="home" class="flex items-center gap-4 cursor-interactive group nav-link">
+    <nav class="fixed top-0 w-full z-50 transition-all duration-500 py-8" id="navbar">
+        <div class="container mx-auto px-6 flex justify-between items-center text-white">
+            <a href="#" data-link="home" class="flex items-center gap-4 cursor-interactive group nav-home">
                 <svg class="w-10 h-10 text-white group-hover:text-brand-gold transition-colors"><use href="#logo-icon"></use></svg>
                 <div class="flex flex-col">
                     <span class="font-serif text-xl tracking-wide uppercase leading-none">Totus Domum</span>
+                    <span class="font-sans text-[0.6rem] tracking-[0.15em] opacity-70 font-light mt-1 hidden md:block">Remote care for your home</span>
                 </div>
             </a>
 
+            <!-- Desktop Nav -->
             <div class="hidden md:flex items-center space-x-12">
-                <a href="#" data-link="home" class="nav-link cursor-interactive text-[11px] uppercase tracking-[0.2em] font-bold hover:text-brand-gold transition-colors">Home</a>
-                <a href="#philosophy" class="cursor-interactive text-[11px] uppercase tracking-[0.2em] font-bold hover:text-brand-gold transition-colors">Philosophy</a>
+                <a href="#" data-link="home" class="nav-link cursor-interactive text-xs uppercase tracking-[0.2em] font-medium hover:text-brand-gold transition-colors">Home</a>
+                <a href="#philosophy" class="nav-link cursor-interactive text-xs uppercase tracking-[0.2em] font-medium hover:text-brand-gold transition-colors">Philosophy</a>
                 
-                <!-- DROPDOWN MENU -->
+                <!-- DROPDOWN MENU - FIXED CONTRAST -->
                 <div class="relative group">
-                    <button class="cursor-interactive flex items-center gap-1 text-[11px] uppercase tracking-[0.2em] font-bold hover:text-brand-gold transition-colors focus:outline-none">
+                    <button class="nav-link cursor-interactive flex items-center gap-1 text-xs uppercase tracking-[0.2em] font-medium hover:text-brand-gold transition-colors py-4 focus:outline-none">
                         Services 
-                        <svg class="w-3 h-3 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        <svg class="w-3 h-3 opacity-70 group-hover:text-brand-gold transition-transform duration-300 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
                     
                     <!-- Dropdown Content -->
-                    <div class="absolute top-full left-1/2 -translate-x-1/2 mt-4 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform group-hover:translate-y-0 translate-y-2">
-                        <div class="bg-[#0F0F0F] border border-white/10 p-6 min-w-[240px] shadow-2xl">
+                    <div class="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
+                        <div class="bg-[#0A0A0A] border border-white/10 p-6 min-w-[260px] shadow-2xl">
                             <ul class="space-y-4">
                                 <li>
-                                    <a href="#" data-link="management" class="nav-link block text-brand-alabaster hover:text-brand-gold text-xs uppercase tracking-[0.15em] transition-colors border-b border-white/5 pb-2">House Management</a>
+                                    <a href="#" data-link="management" class="block text-brand-alabaster hover:text-brand-gold text-[11px] uppercase tracking-[0.15em] transition-colors border-b border-white/5 pb-2">House Management</a>
                                 </li>
                                 <li>
-                                    <a href="#" data-link="search" class="nav-link block text-brand-alabaster hover:text-brand-gold text-xs uppercase tracking-[0.15em] transition-colors border-b border-white/5 pb-2">Property Search</a>
+                                    <a href="#" data-link="search" class="block text-brand-alabaster hover:text-brand-gold text-[11px] uppercase tracking-[0.15em] transition-colors border-b border-white/5 pb-2">Property Search</a>
                                 </li>
                                 <li>
-                                    <a href="#" data-link="concierge" class="nav-link block text-brand-alabaster hover:text-brand-gold text-xs uppercase tracking-[0.15em] transition-colors">Concierge Services</a>
+                                    <a href="#" data-link="concierge" class="block text-brand-alabaster hover:text-brand-gold text-[11px] uppercase tracking-[0.15em] transition-colors">Concierge Services</a>
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </div>
 
-                <a href="#contact" class="cursor-interactive px-6 py-3 border border-white/30 text-[10px] uppercase tracking-[0.2em] font-bold hover:bg-brand-gold hover:border-brand-gold hover:text-white transition-all">Inquire</a>
+                <a href="#contact" class="cursor-interactive px-8 py-3 border border-white/20 text-[10px] uppercase tracking-[0.2em] font-bold hover:bg-brand-gold hover:border-brand-gold hover:text-white transition-all bg-white/5 backdrop-blur-sm">Private Access</a>
             </div>
+            
+            <!-- Mobile Menu Toggle -->
+            <button class="md:hidden text-white cursor-interactive">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
         </div>
     </nav>
 
@@ -191,164 +200,251 @@
         
         <!-- PAGE 1: HOME (Default) -->
         <div id="page-home" class="page-section">
-            <!-- HERO SECTION -->
-            <section id="hero" class="relative h-screen w-full overflow-hidden bg-[#0F0F0F]">
+            
+            <!-- HERO SECTION - NEW LEFT ALIGNED LAYOUT -->
+            <section id="hero" class="relative h-screen w-full overflow-hidden bg-[#0A0A0A]">
                 <div class="absolute inset-0 z-0">
-                    <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/60 z-10"></div>
-                    <img id="hero-img" src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=2574&auto=format&fit=crop" alt="Luxury Interior" class="w-full h-full object-cover scale-110 img-parallax opacity-70" />
+                    <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent z-10"></div>
+                    <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60 z-10"></div>
+                    <img id="hero-img" src="https://images.unsplash.com/photo-1631679706909-1844bbd07221?q=80&w=2592&auto=format&fit=crop" alt="Luxury Interior" class="w-full h-full object-cover scale-110 img-parallax opacity-80" />
                 </div>
-                <div class="relative z-10 h-full flex flex-col justify-center container mx-auto px-6 md:px-24">
-                    <div class="max-w-6xl">
+                
+                <div class="relative z-20 h-full flex flex-col justify-center container mx-auto px-6 md:px-24">
+                    <div class="max-w-5xl">
+                        
+                        <!-- Top Label -->
                         <div class="flex items-center gap-4 mb-8 reveal-stagger">
-                            <span class="h-px w-12 bg-brand-gold"></span>
-                            <span class="text-xs font-bold tracking-[0.3em] uppercase text-brand-gold drop-shadow-md">Bespoke Concierge</span>
+                            <span class="h-px w-16 bg-brand-gold"></span>
+                            <span class="text-[11px] font-bold tracking-[0.3em] uppercase text-brand-gold">Est. 1989</span>
                         </div>
+
+                        <!-- Headline -->
                         <div class="relative">
-                            <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl leading-[1.1] text-brand-alabaster mb-2 split-text drop-shadow-lg">THE ART OF</h1>
-                            <div class="pl-0 md:pl-24 mt-2">
-                                <h1 class="font-cursive text-6xl md:text-8xl lg:text-9xl text-brand-gold reveal-slide-up drop-shadow-md">Seamless Living</h1>
-                            </div>
+                            <h1 class="font-serif text-6xl md:text-8xl lg:text-9xl leading-[0.9] text-brand-alabaster mb-4 split-text">
+                                The Invisible <br/>
+                                <span class="italic font-light text-white/90">Art of Living</span>
+                            </h1>
                         </div>
-                        <div class="mt-12 max-w-lg ml-auto md:mr-32 reveal-stagger">
-                            <p class="font-sans text-base md:text-lg text-brand-alabaster font-normal leading-relaxed mb-8 drop-shadow-md">
-                                Discrete bespoke services for estates in Zurich, Paris, and Malta. We operate with empathy and sound business judgment.
+
+                        <!-- Subtext & CTA -->
+                        <div class="flex flex-col md:flex-row items-start md:items-end gap-12 mt-12 reveal-stagger">
+                            <p class="font-sans text-base md:text-lg text-white/80 font-light leading-relaxed max-w-lg">
+                                Totus Domum curates the exceptional for Malta’s most discerning residents. 
+                                From private estate management to off-market acquisitions, we exist to give you back your time.
                             </p>
-                            <button data-link="management" class="nav-link cursor-interactive flex items-center gap-4 text-xs font-bold uppercase tracking-[0.2em] text-white hover:text-brand-gold transition-colors">
-                                Explore Services <span class="text-xl">→</span>
+                            
+                            <button data-link="management" class="group flex items-center gap-6 text-xs font-bold uppercase tracking-[0.2em] text-white hover:text-brand-gold transition-colors cursor-interactive nav-link-internal">
+                                Explore Services
+                                <span class="w-12 h-[1px] bg-white/50 group-hover:w-20 group-hover:bg-brand-gold transition-all duration-300"></span>
                             </button>
                         </div>
                     </div>
                 </div>
+                
+                <!-- Scroll Indicator -->
+                <div class="absolute bottom-12 right-6 md:right-24 z-20 flex flex-col items-center gap-4 reveal-stagger">
+                    <span class="text-[9px] uppercase tracking-widest text-white/50 writing-vertical-rl">Scroll</span>
+                    <div class="h-12 w-[1px] bg-white/20 overflow-hidden">
+                        <div class="h-full w-full bg-brand-gold animate-scroll-line"></div>
+                    </div>
+                </div>
             </section>
 
-            <!-- PHILOSOPHY SECTION -->
-            <section id="philosophy" class="py-24 md:py-40 bg-[#FAFAFA] relative overflow-hidden">
+            <!-- PHILOSOPHY SECTION - REDESIGNED GRID -->
+            <section id="philosophy" class="py-32 md:py-56 bg-brand-alabaster relative overflow-hidden">
                 <div class="container mx-auto px-6 relative z-10">
-                    <div class="flex flex-col items-center text-center">
-                        <span class="text-[10px] uppercase tracking-[0.4em] text-brand-gold font-bold mb-8 reveal-text">The Standard</span>
-                        <h2 class="font-serif text-4xl md:text-7xl lg:text-8xl text-brand-dark leading-[1.0] mb-4 split-text">Excellence in</h2>
-                        <h2 class="font-cursive text-5xl md:text-8xl lg:text-9xl text-brand-gold mb-16 reveal-slide-up">Every Detail</h2>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 max-w-5xl mx-auto text-left items-start mt-8">
-                            <div class="reveal-fade-up">
-                                <h3 class="font-sans text-xs font-bold uppercase tracking-widest text-brand-gray mb-6">Our Promise</h3>
-                                <p class="font-serif text-2xl md:text-3xl text-brand-dark leading-tight">
-                                    We bridge the gap between <span class="italic text-brand-gold">complex demands</span> and seamless living.
+                    
+                    <!-- Header -->
+                    <div class="flex flex-col items-center text-center mb-24">
+                        <span class="text-[10px] uppercase tracking-[0.4em] text-brand-goldDark font-bold mb-6 reveal-text">Our Philosophy</span>
+                        
+                        <h2 class="font-serif text-5xl md:text-7xl text-brand-dark leading-[1.1] max-w-4xl split-text">
+                            We bridge the gap between <br/> 
+                            <span class="italic text-brand-charcoal">complex demands</span> and <span class="text-brand-goldDark">seamless living.</span>
+                        </h2>
+                    </div>
+
+                    <!-- Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-32 items-center">
+                        <div class="relative reveal-fade-up">
+                            <div class="aspect-[4/5] overflow-hidden bg-brand-gray/10">
+                                <img src="https://images.unsplash.com/photo-1507652313519-d4e9174996dd?q=80&w=2670" alt="Architectural Detail" class="w-full h-full object-cover opacity-90 hover:scale-105 transition-transform duration-1000" />
+                            </div>
+                            <!-- Decorative border -->
+                            <div class="absolute -bottom-8 -right-8 w-32 h-32 border-r border-b border-brand-gold/40 hidden md:block"></div>
+                        </div>
+
+                        <div class="flex flex-col gap-8 reveal-fade-up delay-100">
+                            <div>
+                                <h3 class="font-sans text-xs font-bold uppercase tracking-widest text-brand-goldDark mb-4">The Standard</h3>
+                                <p class="font-serif text-3xl md:text-4xl text-brand-dark leading-tight">
+                                    Precision in every detail, discretion in every action.
                                 </p>
                             </div>
-                            <div class="reveal-fade-up delay-100">
-                                <p class="text-brand-gray font-normal leading-relaxed text-base md:text-lg">
-                                    From managing global property portfolios to coordinating executive schedules, we handle the arduous tasks with empathy. Your home is not just an asset, it is a sanctuary.
-                                </p>
+                            
+                            <p class="text-brand-gray font-light leading-relaxed text-lg">
+                                True luxury is the absence of worry. From managing global property portfolios to coordinating executive schedules, we handle the arduous tasks with empathy and military precision. Your home is not just an asset, it is a sanctuary that requires silent, expert guardianship.
+                            </p>
+
+                            <div class="pt-8 border-t border-brand-dark/10">
+                                <ul class="grid grid-cols-2 gap-y-4 font-sans text-xs uppercase tracking-widest font-medium text-brand-dark">
+                                    <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-brand-gold rounded-full"></span> Unwavering Privacy</li>
+                                    <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-brand-gold rounded-full"></span> Global Network</li>
+                                    <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-brand-gold rounded-full"></span> Proactive Care</li>
+                                    <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-brand-gold rounded-full"></span> Bespoke Solutions</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- SERVICES SECTION (FIXED HORIZONTAL SCROLL) -->
-            <section id="services" class="bg-brand-dark text-brand-alabaster overflow-hidden">
-                <div class="services-wrapper h-screen flex flex-col justify-center sticky top-0 overflow-hidden">
-                    <div class="absolute top-12 left-6 md:top-24 md:left-24 z-20 pointer-events-none services-intro">
-                        <span class="text-[10px] uppercase tracking-[0.4em] text-brand-gold font-bold block mb-4">What We Do</span>
-                        <h2 class="text-4xl md:text-6xl font-serif">Curated Services</h2>
-                    </div>
-                    <div class="services-track flex items-center gap-8 md:gap-24 px-6 md:px-24 w-max h-full pt-32 pb-12">
-                        <div class="w-[5vw] md:w-[25vw] shrink-0"></div>
-                        <!-- Card 1 -->
-                        <div data-link="management" class="nav-link service-card w-[85vw] md:w-[45vw] lg:w-[35vw] h-[60vh] relative flex flex-col group shrink-0 cursor-interactive">
-                            <div class="w-full h-full relative overflow-hidden bg-gray-900 border border-white/10">
-                                <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2000" class="w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-105" alt="Service 1">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent"></div>
-                            </div>
-                            <div class="absolute bottom-0 left-0 w-full p-8 md:p-12">
-                                <span class="text-brand-gold font-mono text-xl mb-4 block">01</span>
-                                <h3 class="font-serif text-3xl md:text-4xl mb-4 text-white">House Management</h3>
-                                <p class="font-sans text-brand-alabaster/80 font-normal text-sm md:text-base max-w-sm">Ensuring your home is secure, clean, and fully ready.</p>
-                            </div>
+            <!-- SERVICES SECTION (HORIZONTAL SCROLL) -->
+            <section id="services" class="bg-brand-charcoal text-brand-alabaster overflow-hidden">
+                <div class="services-wrapper h-[300vh] relative">
+                    <div class="sticky top-0 h-screen flex flex-col justify-center overflow-hidden">
+                        
+                        <div class="absolute top-12 md:top-24 left-6 md:left-24 z-20 pointer-events-none services-intro">
+                            <span class="text-[10px] uppercase tracking-[0.4em] text-brand-gold font-bold block mb-4">Expertise</span>
+                            <h2 class="text-5xl md:text-7xl font-serif text-white">Curated Services</h2>
                         </div>
-                        <!-- Card 2 -->
-                        <div data-link="search" class="nav-link service-card w-[85vw] md:w-[45vw] lg:w-[35vw] h-[60vh] relative flex flex-col group shrink-0 cursor-interactive">
-                            <div class="w-full h-full relative overflow-hidden bg-gray-900 border border-white/10">
-                                <img src="https://images.unsplash.com/photo-1556910103-1c02745a30bf?q=80&w=2000" class="w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-105" alt="Service 2">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent"></div>
+
+                        <div class="services-track flex items-center gap-8 md:gap-24 px-6 md:px-24 w-max h-full pt-32 pb-12">
+                            <div class="w-[5vw] md:w-[25vw] shrink-0"></div>
+                            
+                            <!-- Card 1 -->
+                            <div data-link="management" class="nav-link-internal w-[85vw] md:w-[600px] shrink-0 group cursor-interactive">
+                                <div class="aspect-[4/3] md:aspect-[16/9] w-full relative overflow-hidden mb-8 bg-black">
+                                    <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2000" class="w-full h-full object-cover opacity-70 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" alt="House Management">
+                                    <div class="absolute inset-0 border border-white/10 group-hover:border-brand-gold/50 transition-colors duration-500 z-10"></div>
+                                </div>
+                                <div class="flex flex-col items-start border-t border-white/10 pt-8 group-hover:border-brand-gold/30 transition-colors duration-500">
+                                    <span class="text-brand-gold font-mono text-sm mb-4">01</span>
+                                    <h3 class="font-serif text-3xl md:text-4xl mb-4 text-white group-hover:text-brand-gold transition-colors duration-300">House Management</h3>
+                                    <p class="font-sans text-brand-alabaster/60 font-light text-sm md:text-base max-w-md leading-relaxed mb-6">Ensuring your home is secure, clean, and fully ready. We handle the complexities so you enjoy the peace.</p>
+                                    <span class="flex items-center gap-2 text-[10px] uppercase tracking-widest text-white group-hover:gap-4 transition-all duration-300">
+                                        Discover <span class="text-brand-gold">→</span>
+                                    </span>
+                                </div>
                             </div>
-                            <div class="absolute bottom-0 left-0 w-full p-8 md:p-12">
-                                <span class="text-brand-gold font-mono text-xl mb-4 block">02</span>
-                                <h3 class="font-serif text-3xl md:text-4xl mb-4 text-white">Property Search</h3>
-                                <p class="font-sans text-brand-alabaster/80 font-normal text-sm md:text-base max-w-sm">Finding the perfect new home for your needs.</p>
+
+                            <!-- Card 2 -->
+                            <div data-link="search" class="nav-link-internal w-[85vw] md:w-[600px] shrink-0 group cursor-interactive">
+                                <div class="aspect-[4/3] md:aspect-[16/9] w-full relative overflow-hidden mb-8 bg-black">
+                                    <img src="https://images.unsplash.com/photo-1556910103-1c02745a30bf?q=80&w=2000" class="w-full h-full object-cover opacity-70 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" alt="Property Search">
+                                    <div class="absolute inset-0 border border-white/10 group-hover:border-brand-gold/50 transition-colors duration-500 z-10"></div>
+                                </div>
+                                <div class="flex flex-col items-start border-t border-white/10 pt-8 group-hover:border-brand-gold/30 transition-colors duration-500">
+                                    <span class="text-brand-gold font-mono text-sm mb-4">02</span>
+                                    <h3 class="font-serif text-3xl md:text-4xl mb-4 text-white group-hover:text-brand-gold transition-colors duration-300">Property Search</h3>
+                                    <p class="font-sans text-brand-alabaster/60 font-light text-sm md:text-base max-w-md leading-relaxed mb-6">We help you find the perfect new home that fits your needs and budget with our extensive network.</p>
+                                    <span class="flex items-center gap-2 text-[10px] uppercase tracking-widest text-white group-hover:gap-4 transition-all duration-300">
+                                        Discover <span class="text-brand-gold">→</span>
+                                    </span>
+                                </div>
                             </div>
+
+                            <!-- Card 3 -->
+                            <div data-link="concierge" class="nav-link-internal w-[85vw] md:w-[600px] shrink-0 group cursor-interactive">
+                                <div class="aspect-[4/3] md:aspect-[16/9] w-full relative overflow-hidden mb-8 bg-black">
+                                    <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=2000" class="w-full h-full object-cover opacity-70 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" alt="Concierge">
+                                    <div class="absolute inset-0 border border-white/10 group-hover:border-brand-gold/50 transition-colors duration-500 z-10"></div>
+                                </div>
+                                <div class="flex flex-col items-start border-t border-white/10 pt-8 group-hover:border-brand-gold/30 transition-colors duration-500">
+                                    <span class="text-brand-gold font-mono text-sm mb-4">03</span>
+                                    <h3 class="font-serif text-3xl md:text-4xl mb-4 text-white group-hover:text-brand-gold transition-colors duration-300">Concierge Services</h3>
+                                    <p class="font-sans text-brand-alabaster/60 font-light text-sm md:text-base max-w-md leading-relaxed mb-6">Organizing schedules and handling difficult tasks so you have more free time to enjoy the island lifestyle.</p>
+                                    <span class="flex items-center gap-2 text-[10px] uppercase tracking-widest text-white group-hover:gap-4 transition-all duration-300">
+                                        Discover <span class="text-brand-gold">→</span>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="w-[20vw] shrink-0"></div>
                         </div>
-                        <!-- Card 3 -->
-                        <div data-link="concierge" class="nav-link service-card w-[85vw] md:w-[45vw] lg:w-[35vw] h-[60vh] relative flex flex-col group shrink-0 cursor-interactive">
-                            <div class="w-full h-full relative overflow-hidden bg-gray-900 border border-white/10">
-                                <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=2000" class="w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-105" alt="Service 3">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent"></div>
-                            </div>
-                            <div class="absolute bottom-0 left-0 w-full p-8 md:p-12">
-                                <span class="text-brand-gold font-mono text-xl mb-4 block">03</span>
-                                <h3 class="font-serif text-3xl md:text-4xl mb-4 text-white">Concierge Services</h3>
-                                <p class="font-sans text-brand-alabaster/80 font-normal text-sm md:text-base max-w-sm">Organizing schedules and handling complex tasks.</p>
-                            </div>
-                        </div>
-                        <div class="w-[10vw] shrink-0"></div>
                     </div>
                 </div>
             </section>
+
+             <!-- FEATURE SECTION (PARALLAX) -->
+             <section class="relative h-[90vh] overflow-hidden flex items-center justify-center bg-brand-dark">
+                <div class="absolute inset-0 z-0 opacity-60">
+                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2560&auto=format&fit=crop" class="w-full h-[120%] object-cover brightness-[0.6] img-parallax" alt="Luxury Doorway">
+                </div>
+                <div class="relative z-10 container mx-auto px-6 flex justify-start md:justify-end">
+                    <div class="bg-white/95 backdrop-blur-md p-12 md:p-20 max-w-xl shadow-2xl border-l-4 border-brand-gold reveal-fade-up">
+                        <span class="block text-[10px] uppercase tracking-[0.3em] text-gray-400 mb-6">Custom Tailored</span>
+                        <h2 class="font-serif text-4xl md:text-5xl text-brand-dark mb-6 leading-tight">
+                            Your Home, <br/>
+                            <span class="italic text-brand-gold">Managed Your Way</span>
+                        </h2>
+                        <p class="text-gray-600 mb-10 font-light leading-relaxed font-sans">
+                            We know every home is different. That is why we customize our service to give you exactly what you need, ensuring you have reliable support 365 days a year.
+                        </p>
+                        <a href="#contact" class="text-[11px] uppercase tracking-[0.25em] font-bold text-brand-dark border-b border-brand-dark pb-1 hover:text-brand-gold hover:border-brand-gold transition-all cursor-interactive">Get in Touch</a>
+                    </div>
+                </div>
+             </section>
+
+             <!-- WATERMARK SECTION -->
+             <section class="relative w-full py-32 md:py-56 bg-white overflow-hidden flex items-center justify-center">
+                <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
+                     <svg class="w-[80vw] h-[80vw] text-brand-dark opacity-[0.03] blur-[1px] rotate-12" viewBox="0 0 555 537">
+                        <use href="#logo-icon"></use>
+                     </svg>
+                </div>
+                <div class="relative z-10 container mx-auto px-6 text-center">
+                    <div class="max-w-4xl mx-auto flex flex-col items-center">
+                        <span class="block text-brand-gold font-sans uppercase tracking-[0.35em] text-[10px] font-bold mb-10 reveal-text">Heritage & Trust</span>
+                        <h2 class="text-4xl md:text-7xl font-serif text-brand-dark leading-[1.1] mb-2 split-text">A wealth of expertise</h2>
+                        <div class="font-cursive text-5xl md:text-8xl text-brand-gold drop-shadow-sm mb-12 reveal-slide-up">spanning 35 years</div>
+                        <div class="h-24 w-px bg-brand-dark/20 mx-auto my-8 origin-top reveal-line"></div>
+                        <p class="text-xl md:text-2xl text-brand-charcoal/80 font-serif leading-relaxed reveal-fade-up">
+                             We operate with the profound understanding that your home is not merely an asset to be managed, but a 
+                             <span class="text-brand-dark italic block text-3xl mt-2">legacy to be preserved.</span>
+                        </p>
+                    </div>
+                </div>
+             </section>
         </div>
 
         <!-- PAGE 2: HOUSE MANAGEMENT -->
         <div id="page-management" class="page-section hidden">
-            <section class="relative h-[80vh] w-full overflow-hidden bg-[#0F0F0F] flex items-center">
+            <section class="relative h-[70vh] w-full overflow-hidden bg-[#0A0A0A] flex items-center">
                 <div class="absolute inset-0 z-0">
                     <div class="absolute inset-0 bg-black/50 z-10"></div>
-                    <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=2658" alt="House Management" class="w-full h-full object-cover opacity-70" />
+                    <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=2658" class="w-full h-full object-cover opacity-70 img-parallax" alt="House Management">
                 </div>
                 <div class="relative z-10 container mx-auto px-6 md:px-24">
                     <div class="max-w-4xl">
                         <span class="block text-brand-gold text-xs font-bold tracking-[0.3em] uppercase mb-4">Service . 01</span>
                         <h1 class="font-serif text-5xl md:text-8xl text-white mb-6 leading-tight">The Invisible <br/><span class="font-cursive text-brand-gold">Standard</span></h1>
-                        <p class="text-white/80 max-w-xl text-lg font-light leading-relaxed">
+                        <p class="text-white/80 max-w-xl text-lg font-light leading-relaxed font-sans">
                             Complete technical, administrative, and lifestyle management for your residence. We ensure your home functions perfectly, even in your absence.
                         </p>
                     </div>
                 </div>
             </section>
-            
-            <section class="py-32 bg-white">
+             <section class="py-32 bg-white">
                 <div class="container mx-auto px-6 md:px-24">
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-16">
                         <div class="col-span-1">
                             <h3 class="font-serif text-3xl text-brand-dark mb-6">Technical Oversight</h3>
-                            <p class="text-brand-gray font-light leading-relaxed mb-6">
+                            <p class="text-brand-gray font-light leading-relaxed mb-6 font-sans">
                                 From HVAC systems to smart home integration, our technical audits ensure every system is operational. We manage vetted vendors and oversee all maintenance work.
                             </p>
-                            <ul class="text-xs uppercase tracking-widest text-brand-gold space-y-2 font-bold">
-                                <li>Preventative Maintenance</li>
-                                <li>Vendor Management</li>
-                                <li>Emergency Repairs</li>
-                            </ul>
                         </div>
                         <div class="col-span-1">
                             <h3 class="font-serif text-3xl text-brand-dark mb-6">Staffing & HR</h3>
-                            <p class="text-brand-gray font-light leading-relaxed mb-6">
+                            <p class="text-brand-gray font-light leading-relaxed mb-6 font-sans">
                                 We recruit, train, and manage household staff with the highest levels of discretion. Contracts, payroll, and schedules are handled seamlessly by our office.
                             </p>
-                            <ul class="text-xs uppercase tracking-widest text-brand-gold space-y-2 font-bold">
-                                <li>Recruitment & Vetting</li>
-                                <li>Payroll Administration</li>
-                                <li>Training Protocols</li>
-                            </ul>
                         </div>
                         <div class="col-span-1">
                             <h3 class="font-serif text-3xl text-brand-dark mb-6">Asset Protection</h3>
-                            <p class="text-brand-gray font-light leading-relaxed mb-6">
+                            <p class="text-brand-gray font-light leading-relaxed mb-6 font-sans">
                                 Your property is a significant asset. We manage inventory, insurance compliance, and security protocols to ensure its value is preserved over generations.
                             </p>
-                            <ul class="text-xs uppercase tracking-widest text-brand-gold space-y-2 font-bold">
-                                <li>Inventory Management</li>
-                                <li>Insurance Liaison</li>
-                                <li>Storm Preparation</li>
-                            </ul>
                         </div>
                     </div>
                 </div>
@@ -357,23 +453,22 @@
 
         <!-- PAGE 3: PROPERTY SEARCH -->
         <div id="page-search" class="page-section hidden">
-            <section class="relative h-[80vh] w-full overflow-hidden bg-[#0F0F0F] flex items-center">
+            <section class="relative h-[70vh] w-full overflow-hidden bg-[#0A0A0A] flex items-center">
                 <div class="absolute inset-0 z-0">
                     <div class="absolute inset-0 bg-black/60 z-10"></div>
-                    <img src="https://images.unsplash.com/photo-1513584685908-2274653fa36f?q=80&w=2670" alt="Property Search" class="w-full h-full object-cover opacity-70" />
+                    <img src="https://images.unsplash.com/photo-1513584685908-2274653fa36f?q=80&w=2670" class="w-full h-full object-cover opacity-70 img-parallax" alt="Property Search">
                 </div>
                 <div class="relative z-10 container mx-auto px-6 md:px-24">
                     <div class="max-w-4xl">
                          <span class="block text-brand-gold text-xs font-bold tracking-[0.3em] uppercase mb-4">Service . 02</span>
                         <h1 class="font-serif text-5xl md:text-8xl text-white mb-6 leading-tight">Unlocking the <br/><span class="font-cursive text-brand-gold">Off-Market</span></h1>
-                        <p class="text-white/80 max-w-xl text-lg font-light leading-relaxed">
+                        <p class="text-white/80 max-w-xl text-lg font-light leading-relaxed font-sans">
                             Access to Malta's most exclusive properties before they reach the public domain. We act exclusively for the buyer, ensuring impartiality.
                         </p>
                     </div>
                 </div>
             </section>
-
-             <section class="py-32 bg-[#FAFAFA]">
+            <section class="py-32 bg-[#FAFAFA]">
                 <div class="container mx-auto px-6 md:px-24">
                     <div class="flex flex-col md:flex-row gap-24 items-center">
                         <div class="md:w-1/2">
@@ -381,19 +476,9 @@
                         </div>
                         <div class="md:w-1/2">
                             <h3 class="font-serif text-4xl text-brand-dark mb-8">The Private Market</h3>
-                            <p class="text-brand-gray text-lg font-light leading-relaxed mb-8">
+                            <p class="text-brand-gray text-lg font-light leading-relaxed mb-8 font-sans">
                                 True luxury often whispers. The finest estates are rarely listed publicly. Through our extensive network of private owners and legal partners, we identify acquisition opportunities that match your precise criteria.
                             </p>
-                             <div class="grid grid-cols-2 gap-8">
-                                <div>
-                                    <span class="block text-4xl font-serif text-brand-gold mb-2">100%</span>
-                                    <span class="text-xs uppercase tracking-widest text-brand-dark">Buyer Focus</span>
-                                </div>
-                                <div>
-                                    <span class="block text-4xl font-serif text-brand-gold mb-2">Privacy</span>
-                                    <span class="text-xs uppercase tracking-widest text-brand-dark">Guaranteed</span>
-                                </div>
-                             </div>
                         </div>
                     </div>
                 </div>
@@ -402,34 +487,33 @@
 
         <!-- PAGE 4: CONCIERGE -->
         <div id="page-concierge" class="page-section hidden">
-            <section class="relative h-[80vh] w-full overflow-hidden bg-[#0F0F0F] flex items-center">
+            <section class="relative h-[70vh] w-full overflow-hidden bg-[#0A0A0A] flex items-center">
                 <div class="absolute inset-0 z-0">
                     <div class="absolute inset-0 bg-black/50 z-10"></div>
-                    <img src="https://images.unsplash.com/photo-1559599238-308793637427?q=80&w=2670" alt="Concierge" class="w-full h-full object-cover opacity-70" />
+                    <img src="https://images.unsplash.com/photo-1559599238-308793637427?q=80&w=2670" class="w-full h-full object-cover opacity-70 img-parallax" alt="Concierge">
                 </div>
                 <div class="relative z-10 container mx-auto px-6 md:px-24">
                     <div class="max-w-4xl">
                         <span class="block text-brand-gold text-xs font-bold tracking-[0.3em] uppercase mb-4">Service . 03</span>
                         <h1 class="font-serif text-5xl md:text-8xl text-white mb-6 leading-tight">Your Time, <br/><span class="font-cursive text-brand-gold">Reclaimed</span></h1>
-                        <p class="text-white/80 max-w-xl text-lg font-light leading-relaxed">
+                        <p class="text-white/80 max-w-xl text-lg font-light leading-relaxed font-sans">
                             From private aviation to sold-out events, our concierge team creates the impossible, giving you back the ultimate luxury: time.
                         </p>
                     </div>
                 </div>
             </section>
-
-            <section class="py-32 bg-brand-dark text-white">
+             <section class="py-32 bg-brand-dark text-white">
                 <div class="container mx-auto px-6 md:px-24">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
                          <div class="border-t border-brand-gold/30 pt-8">
                             <h3 class="font-serif text-3xl mb-4">Global Mobility</h3>
-                            <p class="text-white/60 font-light mb-6">
+                            <p class="text-white/60 font-light mb-6 font-sans">
                                 Private jet charters, yacht brokerage, and chauffeur services coordinated seamlessly across borders. We handle logistics so you simply arrive.
                             </p>
                          </div>
                          <div class="border-t border-brand-gold/30 pt-8">
                             <h3 class="font-serif text-3xl mb-4">Access & Events</h3>
-                            <p class="text-white/60 font-light mb-6">
+                            <p class="text-white/60 font-light mb-6 font-sans">
                                 Reservations at Michelin-starred restaurants, VIP access to art fairs, and front-row seats. We hold the keys to the city's closed doors.
                             </p>
                          </div>
@@ -440,59 +524,40 @@
 
     </main>
 
-    <!-- HERITAGE & TRUST (WATERMARK ANIMATION) - SHARED FOOTER SECTION -->
-    <section id="heritage" class="py-32 md:py-56 bg-white overflow-hidden relative flex items-center justify-center min-h-[50vh]">
-        <div class="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
-            <div id="watermark-bg" class="opacity-[0.03] text-brand-dark w-[80vw] h-[80vw] md:w-[40vw] md:h-[40vw]">
-                <svg viewBox="0 0 555 537" class="w-full h-full">
-                    <use href="#logo-icon"></use>
-                </svg>
-            </div>
-        </div>
-        <div class="relative z-10 container mx-auto px-6 text-center">
-            <div class="max-w-4xl mx-auto flex flex-col items-center">
-                <span class="block text-brand-gold font-sans uppercase tracking-[0.35em] text-[10px] font-bold mb-10">Heritage & Trust</span>
-                <p class="text-xl md:text-3xl text-brand-gray font-serif leading-relaxed">
-                    We operate with the profound understanding that your home is not merely an asset to be managed, but a 
-                    <span class="text-brand-dark italic border-b border-brand-gold">legacy to be preserved.</span>
-                </p>
-            </div>
-        </div>
-    </section>
-
     <!-- CONTACT SECTION -->
-    <section id="contact" class="py-24 md:py-32 bg-[#FAFAFA] relative z-20">
+    <section id="contact" class="py-24 md:py-32 bg-[#F2F0E9] relative z-20">
         <div class="container mx-auto px-6 flex flex-col md:flex-row gap-16">
-            <div class="md:w-1/3">
+            <div class="md:w-1/3 reveal-fade-up">
                 <h2 class="font-serif text-4xl md:text-5xl text-brand-dark mb-8">
-                    Start the <br/>
+                    Let's Start the <br/>
                     <span class="font-cursive text-5xl md:text-6xl text-brand-gold">Conversation</span>
                 </h2>
                 <div class="space-y-8 mt-12">
                     <div>
                         <h4 class="font-serif text-lg text-brand-dark mb-2">Email</h4>
-                        <a href="mailto:info@totusdomum.com" class="text-brand-gray hover:text-brand-gold border-b border-brand-gold/30 hover:border-brand-gold cursor-interactive transition-colors">info@totusdomum.com</a>
+                        <a href="mailto:info@totusdomum.com" class="text-brand-gray hover:text-brand-gold border-b border-brand-gold/30 hover:border-brand-gold cursor-interactive transition-colors font-sans">info@totusdomum.com</a>
                     </div>
                     <div>
-                        <h4 class="font-serif text-lg text-brand-dark mb-2">Office</h4>
-                        <p class="text-brand-gray font-normal">Valletta, Malta</p>
+                        <h4 class="font-serif text-lg text-brand-dark mb-2">Phone</h4>
+                        <p className="text-gray-600">+356 99 99 1972</p>
                     </div>
                 </div>
             </div>
-            <div class="md:w-2/3 bg-white p-8 md:p-16 shadow-2xl border border-gray-100">
+            
+            <div class="md:w-2/3 bg-white p-8 md:p-16 shadow-2xl border border-gray-100 reveal-fade-up delay-100">
                 <form class="space-y-12">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div class="relative">
-                            <input type="text" placeholder="Name" class="w-full border-b border-gray-300 py-3 focus:border-brand-gold outline-none bg-transparent text-brand-dark placeholder-gray-400">
+                            <input type="text" placeholder="First Name" class="w-full border-b border-gray-300 py-3 focus:border-brand-gold outline-none bg-transparent text-brand-dark placeholder-gray-400 font-sans">
                         </div>
                         <div class="relative">
-                            <input type="email" placeholder="Email" class="w-full border-b border-gray-300 py-3 focus:border-brand-gold outline-none bg-transparent text-brand-dark placeholder-gray-400">
+                            <input type="email" placeholder="Email Address" class="w-full border-b border-gray-300 py-3 focus:border-brand-gold outline-none bg-transparent text-brand-dark placeholder-gray-400 font-sans">
                         </div>
                     </div>
                     <div class="relative">
-                        <textarea placeholder="How can we help?" rows="3" class="w-full border-b border-gray-300 py-3 focus:border-brand-gold outline-none bg-transparent resize-none text-brand-dark placeholder-gray-400"></textarea>
+                        <textarea placeholder="Message" rows="3" class="w-full border-b border-gray-300 py-3 focus:border-brand-gold outline-none bg-transparent resize-none text-brand-dark placeholder-gray-400 font-sans"></textarea>
                     </div>
-                    <button type="button" class="bg-brand-gold text-white px-10 py-5 uppercase text-[10px] tracking-[0.25em] font-bold hover:bg-brand-dark transition-colors cursor-interactive w-full md:w-auto">
+                    <button type="button" class="bg-brand-gold text-white px-10 py-5 uppercase text-[10px] tracking-[0.25em] font-bold hover:bg-brand-dark transition-colors cursor-interactive w-full md:w-auto font-sans">
                         Submit Request
                     </button>
                 </form>
@@ -501,25 +566,25 @@
     </section>
 
     <!-- FOOTER -->
-    <footer class="bg-brand-dark text-white pt-24 pb-8">
+    <footer class="bg-white pt-24 pb-8 border-t border-gray-200">
         <div class="container mx-auto px-6">
             <div class="flex flex-col md:flex-row justify-between items-start mb-16">
                 <div>
                     <div class="flex items-center gap-3 mb-6">
-                        <svg class="w-8 h-8 text-brand-gold"><use href="#logo-icon"></use></svg>
-                        <h3 class="font-serif text-2xl">Totus Domum</h3>
+                        <svg class="w-8 h-8 text-brand-dark"><use href="#logo-icon"></use></svg>
+                        <h3 class="font-serif text-2xl text-brand-dark">Totus Domum</h3>
                     </div>
-                    <p class="text-gray-400 text-sm max-w-xs font-normal">The premier lifestyle service for Malta's most discerning residents.</p>
+                    <p class="text-gray-500 text-sm max-w-xs font-normal font-sans">The premier lifestyle service for Malta's most discerning residents.</p>
                 </div>
-                <div class="flex gap-12 mt-12 md:mt-0">
+                <div class="flex gap-12 mt-12 md:mt-0 font-sans">
                     <div class="flex flex-col gap-4">
-                        <a href="#" class="text-[10px] uppercase tracking-widest text-gray-400 hover:text-brand-gold cursor-interactive">Instagram</a>
-                        <a href="#" class="text-[10px] uppercase tracking-widest text-gray-400 hover:text-brand-gold cursor-interactive">LinkedIn</a>
+                        <a href="#" class="text-[10px] uppercase tracking-widest text-gray-500 hover:text-brand-gold cursor-interactive">Instagram</a>
+                        <a href="#" class="text-[10px] uppercase tracking-widest text-gray-500 hover:text-brand-gold cursor-interactive">LinkedIn</a>
                     </div>
                 </div>
             </div>
-            <div class="border-t border-white/10 pt-8 flex justify-between items-center">
-                <p class="text-[10px] uppercase tracking-widest text-gray-600">&copy; 2024 Totus Domum.</p>
+            <div class="border-t border-gray-100 pt-8 flex justify-between items-center font-sans">
+                <p class="text-[10px] uppercase tracking-widest text-gray-400">&copy; 2024 Totus Domum.</p>
             </div>
         </div>
     </footer>
@@ -527,6 +592,7 @@
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
     <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
     <script src="script.js"></script>
 </body>

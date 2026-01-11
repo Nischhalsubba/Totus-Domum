@@ -16,14 +16,17 @@ document.addEventListener('DOMContentLoaded', () => {
     requestAnimationFrame(raf);
 
     // Register GSAP Plugins
-    gsap.registerPlugin(ScrollTrigger);
+    gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-    // 2. HELPER: Split Text
+    // 2. HELPER: Split Text (Simulates simple character split)
     const splitTextToSpans = (selector) => {
         const elements = document.querySelectorAll(selector);
         elements.forEach(el => {
             if(el.classList.contains('split-done')) return; 
             const text = el.textContent.trim();
+            // Don't split if it contains HTML (like the span for Art of Living)
+            if (el.children.length > 0 && el.tagName === 'H1') return; // Skip complex H1s for now to avoid breaking structure
+
             const words = text.split(' ');
             el.innerHTML = ''; 
             words.forEach(word => {
@@ -50,51 +53,68 @@ document.addEventListener('DOMContentLoaded', () => {
         concierge: document.getElementById('page-concierge')
     };
 
-    // Hide all pages except active
     function showPage(pageName) {
-        // Fade out current content
-        gsap.to(window, { scrollTo: 0, duration: 0.5, ease: "power2.inOut" });
-        
+        // 1. Fade out current content
         const currentActive = document.querySelector('.page-section:not(.hidden)');
         
-        const transitionTl = gsap.timeline({
+        gsap.to(window, { scrollTo: 0, duration: 0.5, ease: "power2.inOut" });
+
+        const tl = gsap.timeline({
             onComplete: () => {
-                // Hide all
-                Object.values(pages).forEach(el => el.classList.add('hidden'));
-                // Show target
+                // 2. Hide all, show target
+                Object.values(pages).forEach(el => {
+                    if(el) el.classList.add('hidden');
+                });
                 const target = pages[pageName] || pages['home'];
-                target.classList.remove('hidden');
-                
-                // Re-init animations for the new page
-                ScrollTrigger.refresh();
-                initAnimations();
-                
-                // Fade In
-                gsap.fromTo(target, { opacity: 0 }, { opacity: 1, duration: 0.8 });
+                if(target) {
+                    target.classList.remove('hidden');
+                    // 3. Fade In target
+                    gsap.fromTo(target, { opacity: 0 }, { opacity: 1, duration: 0.8 });
+                    
+                    // 4. Refresh ScrollTrigger for new content height
+                    ScrollTrigger.refresh();
+                    initAnimations();
+                }
             }
         });
 
         if (currentActive) {
-            transitionTl.to(currentActive, { opacity: 0, duration: 0.4 });
+            tl.to(currentActive, { opacity: 0, duration: 0.4 });
+        } else {
+            // First load or edge case
         }
     }
 
-    // Handle Nav Clicks
-    document.querySelectorAll('.nav-link').forEach(link => {
+    // Handle Internal Nav Clicks
+    document.querySelectorAll('[data-link], .nav-link-internal').forEach(link => {
         link.addEventListener('click', (e) => {
-            e.preventDefault();
+            // Only capture if it's an internal link
             const targetPage = link.getAttribute('data-link');
-            if (targetPage) showPage(targetPage);
+            if (targetPage) {
+                e.preventDefault();
+                showPage(targetPage);
+            }
         });
     });
 
-    // 4. ANIMATION INIT (Called on load & page switch)
+    // 4. NAVIGATION SCROLL EFFECT
+    const nav = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+        if(window.scrollY > 50) {
+            nav.classList.add('bg-[#0A0A0A]', 'border-b', 'border-white/10', 'py-4');
+            nav.classList.remove('py-8');
+        } else {
+            nav.classList.remove('bg-[#0A0A0A]', 'border-b', 'border-white/10', 'py-4');
+            nav.classList.add('py-8');
+        }
+    });
+
+    // 5. ANIMATION INIT
     function initAnimations() {
         splitTextToSpans('.split-text');
         
-        // Hero Parallax (generic for all pages with .img-parallax)
-        const heroes = document.querySelectorAll('.img-parallax');
-        heroes.forEach(img => {
+        // Parallax Images
+        document.querySelectorAll('.img-parallax').forEach(img => {
             gsap.to(img, {
                 yPercent: 30,
                 ease: "none",
@@ -107,21 +127,30 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        // Text Reveals
+        // Text Reveals (Characters)
         document.querySelectorAll('.split-text').forEach(el => {
-            gsap.to(el.querySelectorAll('.char-wrap'), {
-                y: 0,
-                duration: 1,
-                stagger: 0.05,
-                ease: "power3.out",
-                scrollTrigger: {
-                    trigger: el,
-                    start: "top 85%"
-                }
-            });
+            const chars = el.querySelectorAll('.char-wrap');
+            if(chars.length > 0) {
+                gsap.to(chars, {
+                    y: 0,
+                    duration: 1,
+                    stagger: 0.05,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: el,
+                        start: "top 85%"
+                    }
+                });
+            } else {
+                // Fallback for H1 complex structure
+                 gsap.fromTo(el, { y: 50, opacity: 0 }, {
+                    y: 0, opacity: 1, duration: 1, ease: "power3.out",
+                    scrollTrigger: { trigger: el, start: "top 85%" }
+                 });
+            }
         });
 
-        // Slide Up Elements
+        // Slide Up Elements (Cursive etc)
         gsap.utils.toArray('.reveal-slide-up').forEach(el => {
             gsap.fromTo(el, 
                 { y: 100, opacity: 0, rotate: 5 },
@@ -134,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
             );
         });
 
-        // Fade Up Elements
+        // Fade Up Elements (Generic)
         gsap.utils.toArray('.reveal-fade-up').forEach(el => {
             gsap.fromTo(el, 
                 { y: 50, opacity: 0 },
@@ -146,8 +175,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             );
         });
-        
-        // Specific Logic for Home Services Horizontal Scroll
+
+         // Reveal Stagger (Hero items)
+         const staggers = document.querySelectorAll('.reveal-stagger');
+         if(staggers.length > 0) {
+            gsap.fromTo(staggers, 
+                { y: 30, opacity: 0 },
+                { y: 0, opacity: 1, duration: 1, stagger: 0.2, ease: "power2.out", delay: 1 }
+            );
+         }
+
+        // Horizontal Scroll for Services
         const servicesSection = document.querySelector('#services');
         const track = document.querySelector('.services-track');
         if (servicesSection && track && !servicesSection.closest('.hidden')) {
@@ -155,7 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const tween = gsap.to(track, { x: getScrollAmount, ease: "none" });
             
             ScrollTrigger.create({
-                trigger: servicesSection,
+                trigger: ".services-wrapper",
                 start: "top top",
                 end: () => `+=${track.scrollWidth - window.innerWidth}`,
                 pin: true,
@@ -163,10 +201,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 scrub: 1,
                 invalidateOnRefresh: true,
             });
+            
+            // Fade out intro text on scroll
+            gsap.to('.services-intro', {
+                opacity: 0,
+                scrollTrigger: {
+                    trigger: ".services-wrapper",
+                    start: "top top",
+                    end: "top -10%",
+                    scrub: true
+                }
+            });
         }
     }
 
-    // 5. Initial Load
+    // 6. PRELOADER & INITIAL LOAD
     const preloaderTl = gsap.timeline({
         onComplete: () => {
             gsap.to('#preloader', {
@@ -187,9 +236,10 @@ document.addEventListener('DOMContentLoaded', () => {
         .to('#preloader-logo', { opacity: 1, y: 0, duration: 1 })
         .to('#preloader-text', { opacity: 1, y: 0, duration: 0.8 }, "-=0.5")
         .to('#preloader-bar', { width: "100%", duration: 1.5, ease: "expo.inOut" })
+        .to('#preloader-sub', { opacity: 0.5, duration: 0.5 }, "-=1")
         .to('#preloader', { delay: 0.2 });
 
-    // 6. Custom Cursor
+    // 7. CUSTOM CURSOR
     const cursorDot = document.querySelector('.cursor-dot');
     const cursorCircle = document.querySelector('.cursor-circle');
     let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0;
@@ -208,9 +258,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     animateCursor();
 
-    const interactiveElements = document.querySelectorAll('.cursor-interactive, a, button');
-    interactiveElements.forEach(el => {
-        el.addEventListener('mouseenter', () => gsap.to(cursorCircle, { scale: 1.5, opacity: 0.5, backgroundColor: 'rgba(176, 141, 85, 0.1)' }));
-        el.addEventListener('mouseleave', () => gsap.to(cursorCircle, { scale: 1, opacity: 1, backgroundColor: 'transparent' }));
+    // Cursor Interactions
+    document.addEventListener('mouseover', (e) => {
+        const target = e.target;
+        if (target.closest('.cursor-interactive') || target.tagName === 'A' || target.tagName === 'BUTTON') {
+             gsap.to(cursorCircle, { scale: 1.5, opacity: 0.5, backgroundColor: 'rgba(198, 168, 124, 0.1)' });
+        } else {
+             gsap.to(cursorCircle, { scale: 1, opacity: 1, backgroundColor: 'transparent' });
+        }
     });
 });

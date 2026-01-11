@@ -4,97 +4,81 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 
 const Hero: React.FC = () => {
   const { scrollY } = useScroll();
-  
-  // Parallax effects
   const y = useTransform(scrollY, [0, 1000], [0, 400]);
-  const opacity = useTransform(scrollY, [0, 600], [1, 0]);
-
+  
   return (
-    <div className="relative h-screen w-full overflow-hidden bg-[#F5F2EB]">
+    <div className="relative h-screen w-full overflow-hidden bg-brand-dark">
       
-      {/* Background Image */}
+      {/* Background Image with Enhanced Contrast Overlay */}
       <motion.div 
-        style={{ y, opacity }}
+        style={{ y }}
         className="absolute inset-0 z-0"
       >
-        <motion.div 
-            initial={{ scale: 1.2 }}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent z-10" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60 z-10" />
+        
+        <motion.img 
+            initial={{ scale: 1.15 }}
             animate={{ scale: 1 }}
-            transition={{ duration: 2.5, ease: "easeOut" }}
-            className="w-full h-full"
-        >
-             {/* Dark overlay for text contrast */}
-            <div className="absolute inset-0 bg-black/20 z-10" />
-            <img 
-                src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=2574&auto=format&fit=crop" 
-                alt="Luxury Maltese Interior" 
-                className="w-full h-full object-cover"
-            />
-        </motion.div>
+            transition={{ duration: 2, ease: "easeOut" }}
+            src="https://images.unsplash.com/photo-1631679706909-1844bbd07221?q=80&w=2592&auto=format&fit=crop" 
+            alt="Minimalist Luxury Interior" 
+            className="w-full h-full object-cover opacity-80"
+        />
       </motion.div>
 
       {/* Main Content */}
-      <div className="relative z-20 h-full flex flex-col justify-center container mx-auto px-6 md:px-24 pt-20">
-        <div className="max-w-4xl">
+      <div className="relative z-20 h-full flex flex-col justify-center container mx-auto px-6 md:px-24">
+        <div className="max-w-5xl">
             
-            {/* Tagline */}
-            <div className="overflow-hidden mb-8">
-                <motion.div 
-                    initial={{ y: "100%" }}
-                    animate={{ y: 0 }}
-                    transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                    className="flex items-center gap-4"
-                >
-                    <span className="h-px w-12 bg-brand-alabaster"></span>
-                    <span className="text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-brand-alabaster drop-shadow-md">
-                        Bespoke Concierge
-                    </span>
-                </motion.div>
-            </div>
-
-            {/* Large Typography */}
-            <div className="relative">
-                <div className="overflow-hidden">
-                    <motion.h1 
-                        initial={{ y: "100%", opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        transition={{ duration: 1.2, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                        className="font-serif text-7xl md:text-[8vw] leading-[0.9] text-brand-alabaster mix-blend-overlay"
-                    >
-                        THE ART OF
-                    </motion.h1>
-                </div>
-                
-                <div className="overflow-hidden pl-12 md:pl-[10vw] -mt-2 md:-mt-[1vw]">
-                     <motion.div
-                        initial={{ y: "120%", rotate: 2 }}
-                        animate={{ y: 0, rotate: 0 }}
-                        transition={{ duration: 1.4, delay: 0.9, ease: [0.16, 1, 0.3, 1] }}
-                        className="font-cursive text-7xl md:text-[9vw] text-brand-gold drop-shadow-lg"
-                     >
-                        Seamless Living
-                     </motion.div>
-                </div>
-            </div>
-
-            {/* Description & CTA */}
+            {/* Top Label */}
             <motion.div 
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, delay: 1.5, ease: "easeOut" }}
-                className="mt-16 md:mt-24 max-w-lg ml-auto md:mr-20"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 1, delay: 0.5 }}
+                className="flex items-center gap-4 mb-8"
             >
-                <p className="font-sans text-lg text-brand-alabaster/90 font-light leading-relaxed mb-10 text-shadow-sm">
-                    Discrete bespoke services for estates in Zurich, Paris, and Malta. We operate with empathy and sound business judgment.
-                </p>
-
-                <div className="flex flex-col md:flex-row gap-6 items-start">
-                     <button className="group flex items-center gap-4 text-xs font-bold uppercase tracking-[0.2em] text-brand-alabaster transition-all hover:text-brand-gold">
-                        Inquire Now
-                        <span className="w-12 h-px bg-brand-alabaster group-hover:bg-brand-gold transition-colors"></span>
-                     </button>
-                </div>
+                <div className="h-[1px] w-16 bg-brand-gold"></div>
+                <span className="text-[11px] font-bold tracking-[0.3em] uppercase text-brand-gold">
+                    Est. 1989
+                </span>
             </motion.div>
+
+            {/* Headline */}
+            <div className="relative">
+                <motion.h1 
+                    initial={{ opacity: 0, y: 40 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1.2, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                    className="font-serif text-6xl md:text-8xl lg:text-9xl leading-[0.9] text-brand-alabaster mb-4"
+                >
+                    The Invisible <br/>
+                    <span className="italic font-light">Art of Living</span>
+                </motion.h1>
+            </div>
+
+            {/* Subtext & CTA */}
+            <div className="flex flex-col md:flex-row items-start md:items-end gap-12 mt-12">
+                <motion.p 
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 1, delay: 1.2 }}
+                    className="font-sans text-base md:text-lg text-white/80 font-light leading-relaxed max-w-lg"
+                >
+                    Totus Domum curates the exceptional for Malta’s most discerning residents. 
+                    From private estate management to off-market acquisitions, we exist to give you back your time.
+                </motion.p>
+                
+                <motion.button 
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 1, delay: 1.4 }}
+                    className="group flex items-center gap-6 text-xs font-bold uppercase tracking-[0.2em] text-white hover:text-brand-gold transition-colors"
+                >
+                    Explore Services
+                    <span className="w-12 h-[1px] bg-white/50 group-hover:w-20 group-hover:bg-brand-gold transition-all duration-300"></span>
+                </motion.button>
+            </div>
         </div>
       </div>
       
@@ -103,10 +87,16 @@ const Hero: React.FC = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2, duration: 1 }}
-        className="absolute bottom-12 left-6 md:left-24 text-brand-alabaster/60 z-20"
+        className="absolute bottom-12 right-6 md:right-24 z-20 flex flex-col items-center gap-4"
       >
-          <div className="h-16 w-px bg-gradient-to-b from-brand-alabaster to-transparent"></div>
-          <span className="block mt-4 text-[10px] uppercase tracking-widest writing-vertical-rl rotate-180">Scroll</span>
+          <span className="text-[9px] uppercase tracking-widest text-white/50 writing-vertical-rl">Scroll</span>
+          <div className="h-12 w-[1px] bg-white/20">
+            <motion.div 
+                animate={{ y: [0, 48, 0] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                className="h-full w-full bg-brand-gold origin-top" 
+            />
+          </div>
       </motion.div>
     </div>
   );
