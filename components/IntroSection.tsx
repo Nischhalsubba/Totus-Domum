@@ -1,14 +1,24 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 const IntroSection: React.FC = () => {
+  const containerRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
+
+  const yLeft = useTransform(scrollYProgress, [0, 1], [50, -50]);
+  const yRight = useTransform(scrollYProgress, [0, 1], [100, -20]);
+
   return (
-    <section className="py-24 md:py-40 bg-white relative">
+    <section ref={containerRef} className="py-24 md:py-40 bg-white relative overflow-hidden">
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row items-start justify-between gap-16">
             
             {/* Left Title Block */}
-            <div className="md:w-1/2">
+            <motion.div style={{ y: yLeft }} className="md:w-1/2">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -23,10 +33,10 @@ const IntroSection: React.FC = () => {
                         <span className="italic font-serif text-brand-gold">Every Detail</span>
                     </h2>
                 </motion.div>
-            </div>
+            </motion.div>
 
             {/* Right Text Block */}
-            <div className="md:w-1/2 md:pt-16">
+            <motion.div style={{ y: yRight }} className="md:w-1/2 md:pt-16">
                  <motion.div
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
@@ -41,7 +51,7 @@ const IntroSection: React.FC = () => {
                         From managing global property portfolios to coordinating executive schedules, we handle the arduous tasks with empathy and precision. We operate with the understanding that your time is the ultimate luxury.
                     </p>
                  </motion.div>
-            </div>
+            </motion.div>
         </div>
       </div>
     </section>

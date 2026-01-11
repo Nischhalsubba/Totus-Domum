@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
@@ -24,11 +25,14 @@ const Services: React.FC = () => {
                             hidden: { opacity: 0, y: 50 },
                             visible: { opacity: 1, y: 0, transition: { duration: 1, ease: [0.16, 1, 0.3, 1] } }
                         }}
-                        className="group relative bg-white h-[650px] flex flex-col justify-between overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-500"
+                        whileHover={{ y: -12 }}
+                        className="group relative bg-white h-[650px] flex flex-col justify-between overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500"
                     >
                         {/* Image Area - Top 60% */}
                         <div className="h-[60%] overflow-hidden relative">
-                             <div className="absolute inset-0 bg-brand-dark/10 group-hover:bg-transparent transition-colors duration-500 z-10"></div>
+                             {/* Overlay: darkened slightly on hover to make text/content pop if needed, or just rich feel */}
+                             <div className="absolute inset-0 bg-brand-dark/0 group-hover:bg-brand-dark/20 transition-colors duration-700 z-10 mix-blend-multiply"></div>
+                             
                              <motion.img 
                                 src={service.image} 
                                 alt={service.title}
@@ -42,7 +46,7 @@ const Services: React.FC = () => {
                         </div>
 
                         {/* Content Area - Bottom 40% */}
-                        <div className="h-[40%] p-8 md:p-10 flex flex-col justify-between relative bg-white">
+                        <div className="h-[40%] p-8 md:p-10 flex flex-col justify-between relative bg-white z-20">
                             <div>
                                 <h3 className="font-serif text-3xl text-brand-dark mb-4 group-hover:text-brand-gold transition-colors duration-300">
                                     {service.title}
@@ -53,10 +57,10 @@ const Services: React.FC = () => {
                             </div>
 
                             <div className="flex justify-between items-end border-t border-gray-100 pt-6 mt-4">
-                                <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-gray-400">View Service</span>
+                                <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-gray-400 group-hover:text-brand-dark transition-colors">View Service</span>
                                 <MagneticButton strength={5}>
                                     <div className="w-10 h-10 rounded-full bg-brand-light flex items-center justify-center group-hover:bg-brand-gold group-hover:text-white transition-colors duration-300">
-                                        <ArrowUpRight className="w-4 h-4" />
+                                        <ArrowUpRight className="w-4 h-4 group-hover:rotate-45 transition-transform duration-300" />
                                     </div>
                                 </MagneticButton>
                             </div>

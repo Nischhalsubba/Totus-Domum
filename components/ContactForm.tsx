@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
@@ -103,10 +104,20 @@ const ContactForm: React.FC = () => {
                         <div className="text-right mt-1 text-xs text-gray-300">0 / 180</div>
                     </div>
 
-                    <button type="button" className="group flex items-center gap-4 bg-brand-gold text-white px-10 py-4 uppercase text-[10px] tracking-[0.2em] font-bold hover:bg-brand-dark transition-colors duration-300">
+                    <motion.button 
+                        type="button" 
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="group flex items-center gap-4 bg-brand-gold text-white px-10 py-4 uppercase text-[10px] tracking-[0.2em] font-bold hover:bg-brand-dark transition-colors duration-300"
+                    >
                         Submit
-                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                    </button>
+                        <motion.div
+                            className="w-4 h-4"
+                            whileHover={{ x: 5 }}
+                        >
+                            <ArrowRight className="w-full h-full" />
+                        </motion.div>
+                    </motion.button>
                 </form>
             </div>
         </div>

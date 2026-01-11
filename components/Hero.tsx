@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import MagneticButton from './MagneticButton';
@@ -16,9 +17,9 @@ const Hero: React.FC = () => {
         className="absolute inset-0 z-0"
       >
         <motion.div 
-            initial={{ scale: 1.1 }}
+            initial={{ scale: 1.15 }}
             animate={{ scale: 1 }}
-            transition={{ duration: 10, ease: "linear" }}
+            transition={{ duration: 12, ease: "linear" }}
             className="w-full h-full"
         >
              {/* Using a high-key, bright interior image to match "Clean on white" request */}
@@ -36,7 +37,7 @@ const Hero: React.FC = () => {
             <motion.div 
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: 1.2 }}
+                transition={{ duration: 0.8, delay: 1 }}
                 className="mb-6 flex items-center gap-4"
             >
                 <span className="h-px w-12 bg-brand-gold"></span>
@@ -49,9 +50,9 @@ const Hero: React.FC = () => {
             <div className="relative">
                 <div className="overflow-hidden">
                     <motion.h1 
-                        initial={{ y: "100%" }}
+                        initial={{ y: "110%" }}
                         animate={{ y: 0 }}
-                        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 1.4 }}
+                        transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1], delay: 1.2 }}
                         className="font-serif text-6xl md:text-8xl lg:text-9xl text-brand-dark leading-[0.9] mb-2"
                     >
                         The Art of
@@ -60,9 +61,9 @@ const Hero: React.FC = () => {
                 
                 <div className="overflow-visible pl-12 md:pl-32 -mt-2 md:-mt-6">
                      <motion.div
-                        initial={{ opacity: 0, y: 40, skewY: 5 }}
+                        initial={{ opacity: 0, y: 60, skewY: 5 }}
                         animate={{ opacity: 1, y: 0, skewY: 0 }}
-                        transition={{ duration: 1.2, ease: "easeOut", delay: 1.6 }}
+                        transition={{ duration: 1.4, ease: "easeOut", delay: 1.5 }}
                         className="font-cursive text-7xl md:text-9xl text-brand-gold"
                      >
                         Seamless Living
@@ -74,7 +75,7 @@ const Hero: React.FC = () => {
             <motion.div 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 2 }}
+                transition={{ duration: 0.8, delay: 1.8 }}
                 className="mt-12 max-w-xl ml-auto mr-12"
             >
                 <p className="font-sans text-lg text-gray-600 font-light leading-relaxed text-balance">
@@ -83,14 +84,22 @@ const Hero: React.FC = () => {
 
                 <div className="mt-10 flex gap-6">
                     <MagneticButton>
-                        <button className="px-8 py-4 bg-brand-dark text-white text-[10px] uppercase tracking-[0.2em] hover:bg-brand-gold transition-colors duration-500">
+                        <motion.button 
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="px-8 py-4 bg-brand-dark text-white text-[10px] uppercase tracking-[0.2em] hover:bg-brand-gold transition-colors duration-500"
+                        >
                             Explore Services
-                        </button>
+                        </motion.button>
                     </MagneticButton>
                     <MagneticButton strength={10}>
-                         <button className="px-8 py-4 bg-transparent border border-brand-dark/20 text-brand-dark text-[10px] uppercase tracking-[0.2em] hover:border-brand-dark transition-colors duration-500">
+                         <motion.button 
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="px-8 py-4 bg-transparent border border-brand-dark/20 text-brand-dark text-[10px] uppercase tracking-[0.2em] hover:border-brand-dark transition-colors duration-500"
+                        >
                             Read Philosophy
-                        </button>
+                        </motion.button>
                     </MagneticButton>
                 </div>
             </motion.div>
