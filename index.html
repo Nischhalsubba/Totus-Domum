@@ -4,16 +4,16 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Totus Domum - Premier Estate & Lifestyle Management in Malta. Bespoke concierge services for ultra-high-net-worth individuals." />
-    <meta name="keywords" content="Luxury Concierge Malta, Estate Management, Property Search, Lifestyle Management, UHNW Services" />
-    <title>Totus Domum | The Invisible Art of Living</title>
+    <meta name="description" content="Totus Domum - Private Office & Estate Stewardship. Serving the world's most discerning families in Malta and beyond." />
+    <meta name="keywords" content="Family Office, Estate Management, Off-Market Real Estate, UHNW Services, Malta Luxury" />
+    <title>Totus Domum | Private Estate Stewardship</title>
     
-    <!-- Fonts: Cormorant Garamond (Serif) & Montserrat (Sans) for modern luxury -->
+    <!-- Fonts: Cormorant Garamond (Serif) & Montserrat (Sans) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@200;300;400;500;600&family=Pinyon+Script&display=swap" rel="stylesheet">
     
-    <!-- Tailwind CSS (CDN) -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- Config -->
@@ -28,16 +28,16 @@
             },
             colors: {
               brand: {
-                gold: '#C6A87C',      // AA Compliant on dark backgrounds
-                goldDark: '#997B4D',  // AA Compliant on light backgrounds
-                dark: '#0A0A0A',      // Deepest Black
-                charcoal: '#1C1C1C',  // Off-black for cards/sections
-                alabaster: '#F2F0E9', // Warm white base
-                gray: '#525252'       // Accessible gray text
+                gold: '#C6A87C',      
+                goldDark: '#997B4D',  
+                dark: '#080808',      // Richer Black
+                charcoal: '#141414',  // Card Background
+                alabaster: '#F5F2EB', 
+                gray: '#525252'       
               }
             },
             backgroundImage: {
-                'noise': "url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22 opacity=%220.05%22/%3E%3C/svg%3E')",
+                'noise': "url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22 opacity=%220.07%22/%3E%3C/svg%3E')",
             }
           }
         }
@@ -46,63 +46,50 @@
 
     <style>
         body {
-            background-color: #F2F0E9;
-            color: #0A0A0A;
+            background-color: #F5F2EB;
+            color: #080808;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             overflow-x: hidden;
-            cursor: none; 
+            /* Native cursor restored */
+            cursor: auto; 
         }
         
         /* Hide Scrollbar */
         ::-webkit-scrollbar { width: 0px; background: transparent; }
         
-        /* Custom Cursor */
-        .cursor-dot {
-            width: 8px; height: 8px; background-color: #C6A87C;
-            position: fixed; top: 0; left: 0; border-radius: 50%;
-            pointer-events: none; z-index: 9999; mix-blend-mode: difference;
-        }
-        .cursor-circle {
-            width: 40px; height: 40px; border: 1px solid rgba(198, 168, 124, 0.5);
-            position: fixed; top: 0; left: 0; border-radius: 50%;
-            pointer-events: none; z-index: 9999; transition: transform 0.1s ease-out;
-        }
-        
-        /* Utility Classes for GSAP */
+        /* GSAP Utility */
         .char-wrap { display: inline-block; overflow: hidden; vertical-align: bottom; }
         .word-wrap { display: inline-block; overflow: hidden; vertical-align: bottom; margin-right: 0.25em; }
         .img-parallax { will-change: transform; }
         
-        /* Navigation Hover Effects */
-        .nav-link::after {
-            content: ''; display: block; width: 0; height: 1px; background: #C6A87C; transition: width 0.3s;
+        /* Noise Overlay for Dark Sections */
+        .bg-noise::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 0;
         }
-        .nav-link:hover::after { width: 100%; }
-        
-        /* Dropdown Visibility */
-        .group:hover .group-hover\:visible { visibility: visible; }
-        .group:hover .group-hover\:opacity-100 { opacity: 1; }
-        .group:hover .group-hover\:translate-y-0 { transform: translateY(0) translateX(-50%); }
-
     </style>
 <script type="importmap">
 {
   "imports": {
-    "react": "https://esm.sh/react@^19.2.3",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "framer-motion": "https://esm.sh/framer-motion@^12.26.2",
     "react/": "https://esm.sh/react@^19.2.3/",
-    "framer-motion": "https://esm.sh/framer-motion@^12.25.0",
-    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "react": "https://esm.sh/react@^19.2.3",
     "vite": "https://esm.sh/vite@^7.3.1",
-    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2"
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/"
   }
 }
 </script>
 </head>
 <body class="antialiased opacity-0"> 
     
-    <!-- SVG DEFS (Hidden) -->
+    <!-- SVG LOGO DEFS -->
     <svg style="display: none;">
         <symbol id="logo-icon" viewBox="0 0 555 537">
              <g transform="matrix(1,0,0,1,-6598.542023,-1842.968333)">
@@ -126,172 +113,149 @@
         </symbol>
     </svg>
 
-    <!-- CUSTOM CURSOR -->
-    <div class="cursor-dot"></div>
-    <div class="cursor-circle"></div>
-
     <!-- PRELOADER -->
-    <div id="preloader" class="fixed inset-0 z-[100] bg-[#0A0A0A] flex flex-col items-center justify-center">
+    <div id="preloader" class="fixed inset-0 z-[100] bg-[#080808] flex flex-col items-center justify-center">
         <div class="flex flex-col items-center">
-            <svg class="w-16 h-16 md:w-20 md:h-20 text-brand-gold mb-8 opacity-0" id="preloader-logo">
+            <svg class="w-20 h-20 text-brand-gold mb-8 opacity-0" id="preloader-logo">
                 <use href="#logo-icon"></use>
             </svg>
-            <span id="preloader-text" class="font-serif text-xl tracking-[0.2em] uppercase text-brand-alabaster opacity-0">Totus Domum</span>
+            <span id="preloader-text" class="font-serif text-2xl tracking-[0.2em] uppercase text-brand-alabaster opacity-0">Totus Domum</span>
             <div class="w-64 h-[1px] bg-white/10 mt-8 relative overflow-hidden">
                 <div id="preloader-bar" class="absolute top-0 left-0 h-full bg-brand-gold w-0"></div>
             </div>
-            <span class="mt-4 text-[9px] uppercase tracking-[0.3em] text-white/30" id="preloader-sub">Loading Experience</span>
+            <span class="mt-4 text-[9px] uppercase tracking-[0.3em] text-white/30 font-sans" id="preloader-sub">Private Office Access</span>
         </div>
     </div>
 
     <!-- NAVIGATION -->
     <nav class="fixed top-0 w-full z-50 transition-all duration-500 py-8" id="navbar">
         <div class="container mx-auto px-6 flex justify-between items-center text-white">
-            <a href="#" data-link="home" class="flex items-center gap-4 cursor-interactive group nav-home">
+            <a href="#" data-link="home" class="flex items-center gap-4 cursor-pointer group nav-home">
                 <svg class="w-10 h-10 text-white group-hover:text-brand-gold transition-colors"><use href="#logo-icon"></use></svg>
                 <div class="flex flex-col">
                     <span class="font-serif text-xl tracking-wide uppercase leading-none">Totus Domum</span>
-                    <span class="font-sans text-[0.6rem] tracking-[0.15em] opacity-70 font-light mt-1 hidden md:block">Remote care for your home</span>
+                    <span class="font-sans text-[0.6rem] tracking-[0.2em] opacity-60 font-light mt-1 hidden md:block">Private Estate Stewardship</span>
                 </div>
             </a>
 
             <!-- Desktop Nav -->
             <div class="hidden md:flex items-center space-x-12">
-                <a href="#" data-link="home" class="nav-link cursor-interactive text-xs uppercase tracking-[0.2em] font-medium hover:text-brand-gold transition-colors">Home</a>
-                <a href="#philosophy" class="nav-link cursor-interactive text-xs uppercase tracking-[0.2em] font-medium hover:text-brand-gold transition-colors">Philosophy</a>
+                <a href="#" data-link="home" class="nav-link cursor-pointer text-[11px] uppercase tracking-[0.2em] font-medium hover:text-brand-gold transition-colors">Residence</a>
+                <a href="#philosophy" class="nav-link cursor-pointer text-[11px] uppercase tracking-[0.2em] font-medium hover:text-brand-gold transition-colors">Philosophy</a>
                 
-                <!-- DROPDOWN MENU - FIXED CONTRAST -->
+                <!-- Services Dropdown -->
                 <div class="relative group">
-                    <button class="nav-link cursor-interactive flex items-center gap-1 text-xs uppercase tracking-[0.2em] font-medium hover:text-brand-gold transition-colors py-4 focus:outline-none">
-                        Services 
+                    <button class="nav-link cursor-pointer flex items-center gap-1 text-[11px] uppercase tracking-[0.2em] font-medium hover:text-brand-gold transition-colors py-4 focus:outline-none">
+                        Expertise 
                         <svg class="w-3 h-3 opacity-70 group-hover:text-brand-gold transition-transform duration-300 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
-                    
-                    <!-- Dropdown Content -->
-                    <div class="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
-                        <div class="bg-[#0A0A0A] border border-white/10 p-6 min-w-[260px] shadow-2xl">
+                    <div class="absolute top-full left-1/2 -translate-x-1/2 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                        <div class="bg-[#080808] border border-white/10 p-8 min-w-[280px] shadow-2xl">
+                            <span class="block text-[9px] uppercase tracking-widest text-gray-500 mb-4 border-b border-gray-800 pb-2">Capabilities</span>
                             <ul class="space-y-4">
                                 <li>
-                                    <a href="#" data-link="management" class="block text-brand-alabaster hover:text-brand-gold text-[11px] uppercase tracking-[0.15em] transition-colors border-b border-white/5 pb-2">House Management</a>
+                                    <a href="#" data-link="management" class="block text-brand-alabaster hover:text-brand-gold text-xs uppercase tracking-[0.15em] transition-colors">Estate Stewardship</a>
                                 </li>
                                 <li>
-                                    <a href="#" data-link="search" class="block text-brand-alabaster hover:text-brand-gold text-[11px] uppercase tracking-[0.15em] transition-colors border-b border-white/5 pb-2">Property Search</a>
+                                    <a href="#" data-link="search" class="block text-brand-alabaster hover:text-brand-gold text-xs uppercase tracking-[0.15em] transition-colors">Silent Acquisitions</a>
                                 </li>
                                 <li>
-                                    <a href="#" data-link="concierge" class="block text-brand-alabaster hover:text-brand-gold text-[11px] uppercase tracking-[0.15em] transition-colors">Concierge Services</a>
+                                    <a href="#" data-link="concierge" class="block text-brand-alabaster hover:text-brand-gold text-xs uppercase tracking-[0.15em] transition-colors">Private Office</a>
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </div>
 
-                <a href="#contact" class="cursor-interactive px-8 py-3 border border-white/20 text-[10px] uppercase tracking-[0.2em] font-bold hover:bg-brand-gold hover:border-brand-gold hover:text-white transition-all bg-white/5 backdrop-blur-sm">Private Access</a>
+                <a href="#contact" class="cursor-pointer px-8 py-3 border border-white/20 text-[10px] uppercase tracking-[0.2em] font-bold hover:bg-brand-gold hover:border-brand-gold hover:text-white transition-all bg-white/5 backdrop-blur-sm">Member Access</a>
             </div>
             
             <!-- Mobile Menu Toggle -->
-            <button class="md:hidden text-white cursor-interactive">
+            <button class="md:hidden text-white cursor-pointer">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"></path></svg>
             </button>
         </div>
     </nav>
 
-    <!-- PAGE CONTAINER: Acts as a Router Outlet -->
+    <!-- CONTENT ROUTER -->
     <main id="content-container">
         
-        <!-- PAGE 1: HOME (Default) -->
+        <!-- PAGE: HOME -->
         <div id="page-home" class="page-section">
             
-            <!-- HERO SECTION - NEW LEFT ALIGNED LAYOUT -->
-            <section id="hero" class="relative h-screen w-full overflow-hidden bg-[#0A0A0A]">
+            <!-- HERO SECTION -->
+            <section id="hero" class="relative h-screen w-full overflow-hidden bg-[#080808]">
                 <div class="absolute inset-0 z-0">
-                    <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent z-10"></div>
-                    <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60 z-10"></div>
-                    <img id="hero-img" src="https://images.unsplash.com/photo-1631679706909-1844bbd07221?q=80&w=2592&auto=format&fit=crop" alt="Luxury Interior" class="w-full h-full object-cover scale-110 img-parallax opacity-80" />
+                    <div class="absolute inset-0 bg-gradient-to-r from-black/90 via-black/40 to-transparent z-10"></div>
+                    <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/80 z-10"></div>
+                    <img id="hero-img" src="https://images.unsplash.com/photo-1631679706909-1844bbd07221?q=80&w=2592&auto=format&fit=crop" alt="Luxury Interior" class="w-full h-full object-cover scale-110 img-parallax opacity-60" />
                 </div>
                 
                 <div class="relative z-20 h-full flex flex-col justify-center container mx-auto px-6 md:px-24">
                     <div class="max-w-5xl">
-                        
-                        <!-- Top Label -->
-                        <div class="flex items-center gap-4 mb-8 reveal-stagger">
-                            <span class="h-px w-16 bg-brand-gold"></span>
-                            <span class="text-[11px] font-bold tracking-[0.3em] uppercase text-brand-gold">Est. 1989</span>
+                        <div class="flex items-center gap-4 mb-10 reveal-stagger">
+                            <span class="h-px w-12 bg-brand-gold"></span>
+                            <span class="text-[10px] font-bold tracking-[0.4em] uppercase text-brand-gold">Established 1989</span>
                         </div>
 
-                        <!-- Headline -->
                         <div class="relative">
-                            <h1 class="font-serif text-6xl md:text-8xl lg:text-9xl leading-[0.9] text-brand-alabaster mb-4 split-text">
-                                The Invisible <br/>
-                                <span class="italic font-light text-white/90">Art of Living</span>
+                            <h1 class="font-serif text-6xl md:text-8xl lg:text-9xl leading-[0.95] text-brand-alabaster mb-6 split-text">
+                                The Unseen Hand <br/>
+                                <span class="italic font-light text-white/80">Behind Your Legacy</span>
                             </h1>
                         </div>
 
-                        <!-- Subtext & CTA -->
-                        <div class="flex flex-col md:flex-row items-start md:items-end gap-12 mt-12 reveal-stagger">
-                            <p class="font-sans text-base md:text-lg text-white/80 font-light leading-relaxed max-w-lg">
-                                Totus Domum curates the exceptional for Malta’s most discerning residents. 
-                                From private estate management to off-market acquisitions, we exist to give you back your time.
+                        <div class="flex flex-col md:flex-row items-start md:items-end gap-16 mt-16 reveal-stagger">
+                            <p class="font-sans text-base md:text-lg text-gray-300 font-light leading-relaxed max-w-lg">
+                                Totus Domum provides comprehensive estate and lifestyle stewardship for the world's most discerning families. We safeguard your assets, your time, and your peace of mind.
                             </p>
                             
-                            <button data-link="management" class="group flex items-center gap-6 text-xs font-bold uppercase tracking-[0.2em] text-white hover:text-brand-gold transition-colors cursor-interactive nav-link-internal">
-                                Explore Services
-                                <span class="w-12 h-[1px] bg-white/50 group-hover:w-20 group-hover:bg-brand-gold transition-all duration-300"></span>
+                            <button data-link="management" class="group flex items-center gap-6 text-[10px] font-bold uppercase tracking-[0.25em] text-white hover:text-brand-gold transition-colors cursor-pointer nav-link-internal border-b border-white/20 pb-2 hover:border-brand-gold">
+                                Explore Capabilities
                             </button>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Scroll Indicator -->
-                <div class="absolute bottom-12 right-6 md:right-24 z-20 flex flex-col items-center gap-4 reveal-stagger">
-                    <span class="text-[9px] uppercase tracking-widest text-white/50 writing-vertical-rl">Scroll</span>
-                    <div class="h-12 w-[1px] bg-white/20 overflow-hidden">
-                        <div class="h-full w-full bg-brand-gold animate-scroll-line"></div>
-                    </div>
-                </div>
             </section>
 
-            <!-- PHILOSOPHY SECTION - REDESIGNED GRID -->
-            <section id="philosophy" class="py-32 md:py-56 bg-brand-alabaster relative overflow-hidden">
+            <!-- PHILOSOPHY -->
+            <section id="philosophy" class="py-32 md:py-48 bg-brand-alabaster relative overflow-hidden">
                 <div class="container mx-auto px-6 relative z-10">
-                    
-                    <!-- Header -->
                     <div class="flex flex-col items-center text-center mb-24">
-                        <span class="text-[10px] uppercase tracking-[0.4em] text-brand-goldDark font-bold mb-6 reveal-text">Our Philosophy</span>
+                        <span class="text-[9px] uppercase tracking-[0.4em] text-brand-goldDark font-bold mb-6 reveal-text">Our Ethos</span>
                         
-                        <h2 class="font-serif text-5xl md:text-7xl text-brand-dark leading-[1.1] max-w-4xl split-text">
-                            We bridge the gap between <br/> 
-                            <span class="italic text-brand-charcoal">complex demands</span> and <span class="text-brand-goldDark">seamless living.</span>
+                        <h2 class="font-serif text-4xl md:text-6xl text-brand-dark leading-[1.1] max-w-4xl split-text">
+                            We are not just managers; <br/> 
+                            <span class="italic text-brand-gray">we are custodians of your peace.</span>
                         </h2>
                     </div>
 
-                    <!-- Grid -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-32 items-center">
-                        <div class="relative reveal-fade-up">
-                            <div class="aspect-[4/5] overflow-hidden bg-brand-gray/10">
-                                <img src="https://images.unsplash.com/photo-1507652313519-d4e9174996dd?q=80&w=2670" alt="Architectural Detail" class="w-full h-full object-cover opacity-90 hover:scale-105 transition-transform duration-1000" />
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-20 md:gap-32 items-center">
+                        <div class="relative reveal-fade-up pl-0 md:pl-12">
+                            <div class="aspect-[3/4] overflow-hidden bg-gray-200 relative">
+                                <img src="https://images.unsplash.com/photo-1507652313519-d4e9174996dd?q=80&w=2670" alt="Architectural Detail" class="w-full h-full object-cover opacity-90 hover:scale-105 transition-transform duration-[1.5s]" />
+                                <div class="absolute inset-0 border-[12px] border-brand-alabaster pointer-events-none"></div>
                             </div>
-                            <!-- Decorative border -->
-                            <div class="absolute -bottom-8 -right-8 w-32 h-32 border-r border-b border-brand-gold/40 hidden md:block"></div>
                         </div>
 
-                        <div class="flex flex-col gap-8 reveal-fade-up delay-100">
+                        <div class="flex flex-col gap-10 reveal-fade-up delay-100">
                             <div>
-                                <h3 class="font-sans text-xs font-bold uppercase tracking-widest text-brand-goldDark mb-4">The Standard</h3>
+                                <h3 class="font-sans text-[10px] font-bold uppercase tracking-widest text-brand-goldDark mb-4">The Standard</h3>
                                 <p class="font-serif text-3xl md:text-4xl text-brand-dark leading-tight">
-                                    Precision in every detail, discretion in every action.
+                                    Precision in every detail, <br/>discretion in every action.
                                 </p>
                             </div>
                             
                             <p class="text-brand-gray font-light leading-relaxed text-lg">
-                                True luxury is the absence of worry. From managing global property portfolios to coordinating executive schedules, we handle the arduous tasks with empathy and military precision. Your home is not just an asset, it is a sanctuary that requires silent, expert guardianship.
+                                True luxury is the absence of worry. From managing multi-jurisdictional property portfolios to coordinating complex family schedules, we handle the arduous tasks with empathy and military precision. Your home is not just an asset—it is a sanctuary that requires silent, expert guardianship.
                             </p>
 
                             <div class="pt-8 border-t border-brand-dark/10">
-                                <ul class="grid grid-cols-2 gap-y-4 font-sans text-xs uppercase tracking-widest font-medium text-brand-dark">
-                                    <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-brand-gold rounded-full"></span> Unwavering Privacy</li>
-                                    <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-brand-gold rounded-full"></span> Global Network</li>
-                                    <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-brand-gold rounded-full"></span> Proactive Care</li>
-                                    <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-brand-gold rounded-full"></span> Bespoke Solutions</li>
+                                <ul class="grid grid-cols-2 gap-y-6 font-sans text-[10px] uppercase tracking-[0.15em] font-medium text-brand-dark">
+                                    <li class="flex items-center gap-3"><span class="w-1 h-1 bg-brand-gold rounded-full"></span> Unwavering Privacy</li>
+                                    <li class="flex items-center gap-3"><span class="w-1 h-1 bg-brand-gold rounded-full"></span> Fiduciary Responsibility</li>
+                                    <li class="flex items-center gap-3"><span class="w-1 h-1 bg-brand-gold rounded-full"></span> Proactive Maintenance</li>
+                                    <li class="flex items-center gap-3"><span class="w-1 h-1 bg-brand-gold rounded-full"></span> Bespoke Solutions</li>
                                 </ul>
                             </div>
                         </div>
@@ -299,107 +263,131 @@
                 </div>
             </section>
 
-            <!-- SERVICES SECTION (HORIZONTAL SCROLL) -->
-            <section id="services" class="bg-brand-charcoal text-brand-alabaster overflow-hidden">
-                <div class="services-wrapper h-[300vh] relative">
-                    <div class="sticky top-0 h-screen flex flex-col justify-center overflow-hidden">
+            <!-- SERVICES SECTION (FIXED HORIZONTAL SCROLL) -->
+            <!-- Using bg-brand-dark with a noise texture to fix "black hole" effect -->
+            <section id="services" class="bg-brand-dark text-brand-alabaster relative bg-noise overflow-hidden">
+                <div class="services-wrapper h-screen flex flex-col justify-center sticky top-0">
+                    
+                    <div class="absolute top-12 md:top-20 left-6 md:left-24 z-20 pointer-events-none services-intro">
+                        <span class="text-[9px] uppercase tracking-[0.4em] text-brand-gold font-bold block mb-4">Core Competencies</span>
+                        <h2 class="text-4xl md:text-6xl font-serif text-white">Curated Services</h2>
+                    </div>
+
+                    <!-- Track width will be calculated in JS -->
+                    <div class="services-track flex items-center gap-8 md:gap-16 px-6 md:px-24 h-full pt-24 pb-12 w-max">
+                        <div class="w-[5vw] md:w-[15vw] shrink-0"></div>
                         
-                        <div class="absolute top-12 md:top-24 left-6 md:left-24 z-20 pointer-events-none services-intro">
-                            <span class="text-[10px] uppercase tracking-[0.4em] text-brand-gold font-bold block mb-4">Expertise</span>
-                            <h2 class="text-5xl md:text-7xl font-serif text-white">Curated Services</h2>
+                        <!-- Card 1: Estate Stewardship -->
+                        <div data-link="management" class="nav-link-internal w-[85vw] md:w-[500px] lg:w-[600px] shrink-0 group cursor-pointer">
+                            <div class="aspect-[16/10] w-full relative overflow-hidden mb-8 bg-brand-charcoal border border-white/5">
+                                <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2000" class="w-full h-full object-cover opacity-60 grayscale group-hover:grayscale-0 group-hover:opacity-90 group-hover:scale-105 transition-all duration-1000" alt="Estate Stewardship">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                            </div>
+                            <div class="flex flex-col items-start px-2">
+                                <span class="text-brand-gold font-mono text-xs mb-3">01</span>
+                                <h3 class="font-serif text-3xl md:text-4xl mb-3 text-white">Estate Stewardship</h3>
+                                <p class="font-sans text-gray-400 font-light text-sm md:text-base max-w-md leading-relaxed mb-6">
+                                    Comprehensive technical, administrative, and HR management for your primary and secondary residences. We ensure operational perfection.
+                                </p>
+                                <span class="text-[10px] uppercase tracking-widest text-brand-gold border-b border-brand-gold/30 pb-1 group-hover:border-brand-gold transition-colors">Details</span>
+                            </div>
                         </div>
 
-                        <div class="services-track flex items-center gap-8 md:gap-24 px-6 md:px-24 w-max h-full pt-32 pb-12">
-                            <div class="w-[5vw] md:w-[25vw] shrink-0"></div>
-                            
-                            <!-- Card 1 -->
-                            <div data-link="management" class="nav-link-internal w-[85vw] md:w-[600px] shrink-0 group cursor-interactive">
-                                <div class="aspect-[4/3] md:aspect-[16/9] w-full relative overflow-hidden mb-8 bg-black">
-                                    <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2000" class="w-full h-full object-cover opacity-70 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" alt="House Management">
-                                    <div class="absolute inset-0 border border-white/10 group-hover:border-brand-gold/50 transition-colors duration-500 z-10"></div>
-                                </div>
-                                <div class="flex flex-col items-start border-t border-white/10 pt-8 group-hover:border-brand-gold/30 transition-colors duration-500">
-                                    <span class="text-brand-gold font-mono text-sm mb-4">01</span>
-                                    <h3 class="font-serif text-3xl md:text-4xl mb-4 text-white group-hover:text-brand-gold transition-colors duration-300">House Management</h3>
-                                    <p class="font-sans text-brand-alabaster/60 font-light text-sm md:text-base max-w-md leading-relaxed mb-6">Ensuring your home is secure, clean, and fully ready. We handle the complexities so you enjoy the peace.</p>
-                                    <span class="flex items-center gap-2 text-[10px] uppercase tracking-widest text-white group-hover:gap-4 transition-all duration-300">
-                                        Discover <span class="text-brand-gold">→</span>
-                                    </span>
-                                </div>
+                        <!-- Card 2: Silent Acquisitions -->
+                        <div data-link="search" class="nav-link-internal w-[85vw] md:w-[500px] lg:w-[600px] shrink-0 group cursor-pointer">
+                            <div class="aspect-[16/10] w-full relative overflow-hidden mb-8 bg-brand-charcoal border border-white/5">
+                                <img src="https://images.unsplash.com/photo-1464938050520-ef2270bb8ce8?q=80&w=2000" class="w-full h-full object-cover opacity-60 grayscale group-hover:grayscale-0 group-hover:opacity-90 group-hover:scale-105 transition-all duration-1000" alt="Silent Acquisitions">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                             </div>
-
-                            <!-- Card 2 -->
-                            <div data-link="search" class="nav-link-internal w-[85vw] md:w-[600px] shrink-0 group cursor-interactive">
-                                <div class="aspect-[4/3] md:aspect-[16/9] w-full relative overflow-hidden mb-8 bg-black">
-                                    <img src="https://images.unsplash.com/photo-1556910103-1c02745a30bf?q=80&w=2000" class="w-full h-full object-cover opacity-70 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" alt="Property Search">
-                                    <div class="absolute inset-0 border border-white/10 group-hover:border-brand-gold/50 transition-colors duration-500 z-10"></div>
-                                </div>
-                                <div class="flex flex-col items-start border-t border-white/10 pt-8 group-hover:border-brand-gold/30 transition-colors duration-500">
-                                    <span class="text-brand-gold font-mono text-sm mb-4">02</span>
-                                    <h3 class="font-serif text-3xl md:text-4xl mb-4 text-white group-hover:text-brand-gold transition-colors duration-300">Property Search</h3>
-                                    <p class="font-sans text-brand-alabaster/60 font-light text-sm md:text-base max-w-md leading-relaxed mb-6">We help you find the perfect new home that fits your needs and budget with our extensive network.</p>
-                                    <span class="flex items-center gap-2 text-[10px] uppercase tracking-widest text-white group-hover:gap-4 transition-all duration-300">
-                                        Discover <span class="text-brand-gold">→</span>
-                                    </span>
-                                </div>
+                            <div class="flex flex-col items-start px-2">
+                                <span class="text-brand-gold font-mono text-xs mb-3">02</span>
+                                <h3 class="font-serif text-3xl md:text-4xl mb-3 text-white">Silent Acquisitions</h3>
+                                <p class="font-sans text-gray-400 font-light text-sm md:text-base max-w-md leading-relaxed mb-6">
+                                    Off-market sourcing of exceptional properties. We act exclusively for the buyer, ensuring anonymity and impartiality in every transaction.
+                                </p>
+                                <span class="text-[10px] uppercase tracking-widest text-brand-gold border-b border-brand-gold/30 pb-1 group-hover:border-brand-gold transition-colors">Details</span>
                             </div>
-
-                            <!-- Card 3 -->
-                            <div data-link="concierge" class="nav-link-internal w-[85vw] md:w-[600px] shrink-0 group cursor-interactive">
-                                <div class="aspect-[4/3] md:aspect-[16/9] w-full relative overflow-hidden mb-8 bg-black">
-                                    <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=2000" class="w-full h-full object-cover opacity-70 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" alt="Concierge">
-                                    <div class="absolute inset-0 border border-white/10 group-hover:border-brand-gold/50 transition-colors duration-500 z-10"></div>
-                                </div>
-                                <div class="flex flex-col items-start border-t border-white/10 pt-8 group-hover:border-brand-gold/30 transition-colors duration-500">
-                                    <span class="text-brand-gold font-mono text-sm mb-4">03</span>
-                                    <h3 class="font-serif text-3xl md:text-4xl mb-4 text-white group-hover:text-brand-gold transition-colors duration-300">Concierge Services</h3>
-                                    <p class="font-sans text-brand-alabaster/60 font-light text-sm md:text-base max-w-md leading-relaxed mb-6">Organizing schedules and handling difficult tasks so you have more free time to enjoy the island lifestyle.</p>
-                                    <span class="flex items-center gap-2 text-[10px] uppercase tracking-widest text-white group-hover:gap-4 transition-all duration-300">
-                                        Discover <span class="text-brand-gold">→</span>
-                                    </span>
-                                </div>
-                            </div>
-
-                            <div class="w-[20vw] shrink-0"></div>
                         </div>
+
+                        <!-- Card 3: The Private Office -->
+                        <div data-link="concierge" class="nav-link-internal w-[85vw] md:w-[500px] lg:w-[600px] shrink-0 group cursor-pointer">
+                            <div class="aspect-[16/10] w-full relative overflow-hidden mb-8 bg-brand-charcoal border border-white/5">
+                                <img src="https://images.unsplash.com/photo-1559599238-308793637427?q=80&w=2000" class="w-full h-full object-cover opacity-60 grayscale group-hover:grayscale-0 group-hover:opacity-90 group-hover:scale-105 transition-all duration-1000" alt="The Private Office">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                            </div>
+                            <div class="flex flex-col items-start px-2">
+                                <span class="text-brand-gold font-mono text-xs mb-3">03</span>
+                                <h3 class="font-serif text-3xl md:text-4xl mb-3 text-white">The Private Office</h3>
+                                <p class="font-sans text-gray-400 font-light text-sm md:text-base max-w-md leading-relaxed mb-6">
+                                    Lifestyle architecture, travel logistics, and access to the inaccessible. We manage your time as rigorously as your assets.
+                                </p>
+                                <span class="text-[10px] uppercase tracking-widest text-brand-gold border-b border-brand-gold/30 pb-1 group-hover:border-brand-gold transition-colors">Details</span>
+                            </div>
+                        </div>
+
+                        <div class="w-[5vw] md:w-[15vw] shrink-0"></div>
                     </div>
                 </div>
             </section>
 
-             <!-- FEATURE SECTION (PARALLAX) -->
-             <section class="relative h-[90vh] overflow-hidden flex items-center justify-center bg-brand-dark">
-                <div class="absolute inset-0 z-0 opacity-60">
-                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2560&auto=format&fit=crop" class="w-full h-[120%] object-cover brightness-[0.6] img-parallax" alt="Luxury Doorway">
+             <!-- GLOBAL REACH (NEW SECTION) -->
+             <section class="py-32 bg-white relative">
+                <div class="container mx-auto px-6">
+                    <div class="flex flex-col md:flex-row justify-between items-end border-b border-gray-200 pb-12 mb-12">
+                        <h2 class="font-serif text-4xl text-brand-dark">Global Reach, <br/><span class="italic text-brand-gold">Local Expertise</span></h2>
+                        <p class="font-sans text-xs uppercase tracking-widest text-gray-500 max-w-xs mt-6 md:mt-0">Operating from Valletta with a network spanning Zurich, London, and Dubai.</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                         <div class="reveal-fade-up">
+                            <span class="block text-4xl font-serif text-brand-dark mb-2">35+</span>
+                            <span class="text-xs uppercase tracking-widest text-gray-400">Years of Experience</span>
+                         </div>
+                         <div class="reveal-fade-up delay-100">
+                            <span class="block text-4xl font-serif text-brand-dark mb-2">€250M+</span>
+                            <span class="text-xs uppercase tracking-widest text-gray-400">Assets Under Stewardship</span>
+                         </div>
+                         <div class="reveal-fade-up delay-200">
+                            <span class="block text-4xl font-serif text-brand-dark mb-2">100%</span>
+                            <span class="text-xs uppercase tracking-widest text-gray-400">Client Confidentiality</span>
+                         </div>
+                    </div>
+                </div>
+             </section>
+
+             <!-- FEATURE SECTION -->
+             <section class="relative h-[80vh] overflow-hidden flex items-center justify-center bg-brand-dark bg-noise">
+                <div class="absolute inset-0 z-0 opacity-50">
+                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2560&auto=format&fit=crop" class="w-full h-[120%] object-cover brightness-[0.5] img-parallax" alt="Luxury Doorway">
                 </div>
                 <div class="relative z-10 container mx-auto px-6 flex justify-start md:justify-end">
-                    <div class="bg-white/95 backdrop-blur-md p-12 md:p-20 max-w-xl shadow-2xl border-l-4 border-brand-gold reveal-fade-up">
-                        <span class="block text-[10px] uppercase tracking-[0.3em] text-gray-400 mb-6">Custom Tailored</span>
-                        <h2 class="font-serif text-4xl md:text-5xl text-brand-dark mb-6 leading-tight">
+                    <div class="bg-[#080808]/90 backdrop-blur-md p-10 md:p-16 max-w-xl border-l-2 border-brand-gold reveal-fade-up">
+                        <span class="block text-[9px] uppercase tracking-[0.3em] text-brand-gold mb-6">Bespoke Mandate</span>
+                        <h2 class="font-serif text-3xl md:text-5xl text-white mb-6 leading-tight">
                             Your Home, <br/>
-                            <span class="italic text-brand-gold">Managed Your Way</span>
+                            <span class="italic text-gray-400">Managed Your Way</span>
                         </h2>
-                        <p class="text-gray-600 mb-10 font-light leading-relaxed font-sans">
-                            We know every home is different. That is why we customize our service to give you exactly what you need, ensuring you have reliable support 365 days a year.
+                        <p class="text-gray-400 mb-8 font-light leading-relaxed font-sans text-sm">
+                            We acknowledge that every legacy is unique. We customize our service protocols to align perfectly with your family office requirements, ensuring seamless support 365 days a year.
                         </p>
-                        <a href="#contact" class="text-[11px] uppercase tracking-[0.25em] font-bold text-brand-dark border-b border-brand-dark pb-1 hover:text-brand-gold hover:border-brand-gold transition-all cursor-interactive">Get in Touch</a>
+                        <a href="#contact" class="text-[10px] uppercase tracking-[0.25em] font-bold text-white border-b border-white/30 pb-2 hover:text-brand-gold hover:border-brand-gold transition-all cursor-pointer">Request Consultation</a>
                     </div>
                 </div>
              </section>
 
              <!-- WATERMARK SECTION -->
-             <section class="relative w-full py-32 md:py-56 bg-white overflow-hidden flex items-center justify-center">
+             <section class="relative w-full py-32 md:py-48 bg-brand-alabaster overflow-hidden flex items-center justify-center">
                 <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
-                     <svg class="w-[80vw] h-[80vw] text-brand-dark opacity-[0.03] blur-[1px] rotate-12" viewBox="0 0 555 537">
+                     <svg class="w-[70vw] h-[70vw] text-brand-dark opacity-[0.03] blur-[1px] rotate-12" viewBox="0 0 555 537">
                         <use href="#logo-icon"></use>
                      </svg>
                 </div>
                 <div class="relative z-10 container mx-auto px-6 text-center">
                     <div class="max-w-4xl mx-auto flex flex-col items-center">
-                        <span class="block text-brand-gold font-sans uppercase tracking-[0.35em] text-[10px] font-bold mb-10 reveal-text">Heritage & Trust</span>
-                        <h2 class="text-4xl md:text-7xl font-serif text-brand-dark leading-[1.1] mb-2 split-text">A wealth of expertise</h2>
-                        <div class="font-cursive text-5xl md:text-8xl text-brand-gold drop-shadow-sm mb-12 reveal-slide-up">spanning 35 years</div>
-                        <div class="h-24 w-px bg-brand-dark/20 mx-auto my-8 origin-top reveal-line"></div>
-                        <p class="text-xl md:text-2xl text-brand-charcoal/80 font-serif leading-relaxed reveal-fade-up">
+                        <span class="block text-brand-gold font-sans uppercase tracking-[0.35em] text-[9px] font-bold mb-8 reveal-text">Heritage & Trust</span>
+                        <h2 class="text-3xl md:text-6xl font-serif text-brand-dark leading-[1.1] mb-2 split-text">A wealth of expertise</h2>
+                        <div class="font-cursive text-5xl md:text-7xl text-brand-gold drop-shadow-sm mb-10 reveal-slide-up">spanning 35 years</div>
+                        <div class="h-16 w-px bg-brand-dark/20 mx-auto my-6 origin-top reveal-line"></div>
+                        <p class="text-xl md:text-2xl text-brand-gray font-serif leading-relaxed reveal-fade-up">
                              We operate with the profound understanding that your home is not merely an asset to be managed, but a 
                              <span class="text-brand-dark italic block text-3xl mt-2">legacy to be preserved.</span>
                         </p>
@@ -408,17 +396,17 @@
              </section>
         </div>
 
-        <!-- PAGE 2: HOUSE MANAGEMENT -->
+        <!-- PAGE 2: ESTATE STEWARDSHIP -->
         <div id="page-management" class="page-section hidden">
-            <section class="relative h-[70vh] w-full overflow-hidden bg-[#0A0A0A] flex items-center">
+            <section class="relative h-[70vh] w-full overflow-hidden bg-[#080808] flex items-center">
                 <div class="absolute inset-0 z-0">
-                    <div class="absolute inset-0 bg-black/50 z-10"></div>
-                    <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=2658" class="w-full h-full object-cover opacity-70 img-parallax" alt="House Management">
+                    <div class="absolute inset-0 bg-black/60 z-10"></div>
+                    <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=2658" class="w-full h-full object-cover opacity-70 img-parallax" alt="Estate Stewardship">
                 </div>
                 <div class="relative z-10 container mx-auto px-6 md:px-24">
                     <div class="max-w-4xl">
-                        <span class="block text-brand-gold text-xs font-bold tracking-[0.3em] uppercase mb-4">Service . 01</span>
-                        <h1 class="font-serif text-5xl md:text-8xl text-white mb-6 leading-tight">The Invisible <br/><span class="font-cursive text-brand-gold">Standard</span></h1>
+                        <span class="block text-brand-gold text-[9px] font-bold tracking-[0.3em] uppercase mb-4">Service . 01</span>
+                        <h1 class="font-serif text-5xl md:text-7xl text-white mb-6 leading-tight">Estate <br/><span class="font-cursive text-brand-gold">Stewardship</span></h1>
                         <p class="text-white/80 max-w-xl text-lg font-light leading-relaxed font-sans">
                             Complete technical, administrative, and lifestyle management for your residence. We ensure your home functions perfectly, even in your absence.
                         </p>
@@ -429,20 +417,20 @@
                 <div class="container mx-auto px-6 md:px-24">
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-16">
                         <div class="col-span-1">
-                            <h3 class="font-serif text-3xl text-brand-dark mb-6">Technical Oversight</h3>
-                            <p class="text-brand-gray font-light leading-relaxed mb-6 font-sans">
-                                From HVAC systems to smart home integration, our technical audits ensure every system is operational. We manage vetted vendors and oversee all maintenance work.
+                            <h3 class="font-serif text-2xl text-brand-dark mb-4">Technical Oversight</h3>
+                            <p class="text-gray-500 font-light leading-relaxed mb-6 font-sans text-sm">
+                                From HVAC systems to smart home integration, our technical audits ensure every system is operational. We manage vetted vendors and oversee all maintenance work with rigorous standards.
                             </p>
                         </div>
                         <div class="col-span-1">
-                            <h3 class="font-serif text-3xl text-brand-dark mb-6">Staffing & HR</h3>
-                            <p class="text-brand-gray font-light leading-relaxed mb-6 font-sans">
-                                We recruit, train, and manage household staff with the highest levels of discretion. Contracts, payroll, and schedules are handled seamlessly by our office.
+                            <h3 class="font-serif text-2xl text-brand-dark mb-4">Staffing & HR</h3>
+                            <p class="text-gray-500 font-light leading-relaxed mb-6 font-sans text-sm">
+                                We recruit, train, and manage household staff with the highest levels of discretion. Contracts, payroll, and rotas are handled seamlessly by our private office.
                             </p>
                         </div>
                         <div class="col-span-1">
-                            <h3 class="font-serif text-3xl text-brand-dark mb-6">Asset Protection</h3>
-                            <p class="text-brand-gray font-light leading-relaxed mb-6 font-sans">
+                            <h3 class="font-serif text-2xl text-brand-dark mb-4">Asset Protection</h3>
+                            <p class="text-gray-500 font-light leading-relaxed mb-6 font-sans text-sm">
                                 Your property is a significant asset. We manage inventory, insurance compliance, and security protocols to ensure its value is preserved over generations.
                             </p>
                         </div>
@@ -451,19 +439,19 @@
             </section>
         </div>
 
-        <!-- PAGE 3: PROPERTY SEARCH -->
+        <!-- PAGE 3: SILENT ACQUISITIONS -->
         <div id="page-search" class="page-section hidden">
-            <section class="relative h-[70vh] w-full overflow-hidden bg-[#0A0A0A] flex items-center">
+            <section class="relative h-[70vh] w-full overflow-hidden bg-[#080808] flex items-center">
                 <div class="absolute inset-0 z-0">
                     <div class="absolute inset-0 bg-black/60 z-10"></div>
                     <img src="https://images.unsplash.com/photo-1513584685908-2274653fa36f?q=80&w=2670" class="w-full h-full object-cover opacity-70 img-parallax" alt="Property Search">
                 </div>
                 <div class="relative z-10 container mx-auto px-6 md:px-24">
                     <div class="max-w-4xl">
-                         <span class="block text-brand-gold text-xs font-bold tracking-[0.3em] uppercase mb-4">Service . 02</span>
-                        <h1 class="font-serif text-5xl md:text-8xl text-white mb-6 leading-tight">Unlocking the <br/><span class="font-cursive text-brand-gold">Off-Market</span></h1>
+                         <span class="block text-brand-gold text-[9px] font-bold tracking-[0.3em] uppercase mb-4">Service . 02</span>
+                        <h1 class="font-serif text-5xl md:text-7xl text-white mb-6 leading-tight">Silent <br/><span class="font-cursive text-brand-gold">Acquisitions</span></h1>
                         <p class="text-white/80 max-w-xl text-lg font-light leading-relaxed font-sans">
-                            Access to Malta's most exclusive properties before they reach the public domain. We act exclusively for the buyer, ensuring impartiality.
+                            Access to the most exclusive properties before they reach the public domain. We act exclusively for the buyer, ensuring total impartiality.
                         </p>
                     </div>
                 </div>
@@ -472,43 +460,46 @@
                 <div class="container mx-auto px-6 md:px-24">
                     <div class="flex flex-col md:flex-row gap-24 items-center">
                         <div class="md:w-1/2">
-                            <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=2653" class="w-full shadow-2xl" alt="Private Viewing" />
+                            <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=2653" class="w-full shadow-2xl grayscale hover:grayscale-0 transition-all duration-700" alt="Private Viewing" />
                         </div>
                         <div class="md:w-1/2">
                             <h3 class="font-serif text-4xl text-brand-dark mb-8">The Private Market</h3>
-                            <p class="text-brand-gray text-lg font-light leading-relaxed mb-8 font-sans">
-                                True luxury often whispers. The finest estates are rarely listed publicly. Through our extensive network of private owners and legal partners, we identify acquisition opportunities that match your precise criteria.
+                            <p class="text-gray-500 text-lg font-light leading-relaxed mb-8 font-sans">
+                                True luxury often whispers. The finest estates are rarely listed publicly. Through our extensive network of private owners, family offices, and legal partners, we identify acquisition opportunities that match your precise investment criteria.
                             </p>
+                            <div class="border-l-2 border-brand-gold pl-6">
+                                <p class="font-serif italic text-brand-dark text-xl">"Discretion is the currency of the private market."</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
         </div>
 
-        <!-- PAGE 4: CONCIERGE -->
+        <!-- PAGE 4: PRIVATE OFFICE -->
         <div id="page-concierge" class="page-section hidden">
-            <section class="relative h-[70vh] w-full overflow-hidden bg-[#0A0A0A] flex items-center">
+            <section class="relative h-[70vh] w-full overflow-hidden bg-[#080808] flex items-center">
                 <div class="absolute inset-0 z-0">
                     <div class="absolute inset-0 bg-black/50 z-10"></div>
                     <img src="https://images.unsplash.com/photo-1559599238-308793637427?q=80&w=2670" class="w-full h-full object-cover opacity-70 img-parallax" alt="Concierge">
                 </div>
                 <div class="relative z-10 container mx-auto px-6 md:px-24">
                     <div class="max-w-4xl">
-                        <span class="block text-brand-gold text-xs font-bold tracking-[0.3em] uppercase mb-4">Service . 03</span>
-                        <h1 class="font-serif text-5xl md:text-8xl text-white mb-6 leading-tight">Your Time, <br/><span class="font-cursive text-brand-gold">Reclaimed</span></h1>
+                        <span class="block text-brand-gold text-[9px] font-bold tracking-[0.3em] uppercase mb-4">Service . 03</span>
+                        <h1 class="font-serif text-5xl md:text-7xl text-white mb-6 leading-tight">The Private <br/><span class="font-cursive text-brand-gold">Office</span></h1>
                         <p class="text-white/80 max-w-xl text-lg font-light leading-relaxed font-sans">
-                            From private aviation to sold-out events, our concierge team creates the impossible, giving you back the ultimate luxury: time.
+                            From private aviation to complex event logistics, our team creates the impossible, giving you back the ultimate luxury: time.
                         </p>
                     </div>
                 </div>
             </section>
-             <section class="py-32 bg-brand-dark text-white">
-                <div class="container mx-auto px-6 md:px-24">
+             <section class="py-32 bg-brand-dark text-white bg-noise">
+                <div class="container mx-auto px-6 md:px-24 relative z-10">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
                          <div class="border-t border-brand-gold/30 pt-8">
                             <h3 class="font-serif text-3xl mb-4">Global Mobility</h3>
                             <p class="text-white/60 font-light mb-6 font-sans">
-                                Private jet charters, yacht brokerage, and chauffeur services coordinated seamlessly across borders. We handle logistics so you simply arrive.
+                                Private jet charters, yacht brokerage, and chauffeur services coordinated seamlessly across borders. We handle the logistics so you simply arrive.
                             </p>
                          </div>
                          <div class="border-t border-brand-gold/30 pt-8">
@@ -525,21 +516,21 @@
     </main>
 
     <!-- CONTACT SECTION -->
-    <section id="contact" class="py-24 md:py-32 bg-[#F2F0E9] relative z-20">
+    <section id="contact" class="py-24 md:py-32 bg-[#F5F2EB] relative z-20">
         <div class="container mx-auto px-6 flex flex-col md:flex-row gap-16">
             <div class="md:w-1/3 reveal-fade-up">
                 <h2 class="font-serif text-4xl md:text-5xl text-brand-dark mb-8">
-                    Let's Start the <br/>
-                    <span class="font-cursive text-5xl md:text-6xl text-brand-gold">Conversation</span>
+                    Initiate a <br/>
+                    <span class="font-cursive text-5xl md:text-6xl text-brand-gold">Dialogue</span>
                 </h2>
                 <div class="space-y-8 mt-12">
                     <div>
-                        <h4 class="font-serif text-lg text-brand-dark mb-2">Email</h4>
-                        <a href="mailto:info@totusdomum.com" class="text-brand-gray hover:text-brand-gold border-b border-brand-gold/30 hover:border-brand-gold cursor-interactive transition-colors font-sans">info@totusdomum.com</a>
+                        <h4 class="font-serif text-lg text-brand-dark mb-2">Private Office</h4>
+                        <p className="text-gray-500 font-sans text-sm">Valletta, Malta</p>
                     </div>
                     <div>
-                        <h4 class="font-serif text-lg text-brand-dark mb-2">Phone</h4>
-                        <p className="text-gray-600">+356 99 99 1972</p>
+                        <h4 class="font-serif text-lg text-brand-dark mb-2">Inquiries</h4>
+                        <a href="mailto:office@totusdomum.com" class="text-gray-500 hover:text-brand-gold border-b border-brand-gold/30 hover:border-brand-gold cursor-pointer transition-colors font-sans text-sm">office@totusdomum.com</a>
                     </div>
                 </div>
             </div>
@@ -548,17 +539,17 @@
                 <form class="space-y-12">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div class="relative">
-                            <input type="text" placeholder="First Name" class="w-full border-b border-gray-300 py-3 focus:border-brand-gold outline-none bg-transparent text-brand-dark placeholder-gray-400 font-sans">
+                            <input type="text" placeholder="Name" class="w-full border-b border-gray-300 py-3 focus:border-brand-gold outline-none bg-transparent text-brand-dark placeholder-gray-400 font-sans">
                         </div>
                         <div class="relative">
-                            <input type="email" placeholder="Email Address" class="w-full border-b border-gray-300 py-3 focus:border-brand-gold outline-none bg-transparent text-brand-dark placeholder-gray-400 font-sans">
+                            <input type="email" placeholder="Email" class="w-full border-b border-gray-300 py-3 focus:border-brand-gold outline-none bg-transparent text-brand-dark placeholder-gray-400 font-sans">
                         </div>
                     </div>
                     <div class="relative">
-                        <textarea placeholder="Message" rows="3" class="w-full border-b border-gray-300 py-3 focus:border-brand-gold outline-none bg-transparent resize-none text-brand-dark placeholder-gray-400 font-sans"></textarea>
+                        <textarea placeholder="Nature of Inquiry" rows="3" class="w-full border-b border-gray-300 py-3 focus:border-brand-gold outline-none bg-transparent resize-none text-brand-dark placeholder-gray-400 font-sans"></textarea>
                     </div>
-                    <button type="button" class="bg-brand-gold text-white px-10 py-5 uppercase text-[10px] tracking-[0.25em] font-bold hover:bg-brand-dark transition-colors cursor-interactive w-full md:w-auto font-sans">
-                        Submit Request
+                    <button type="button" class="bg-brand-gold text-white px-10 py-5 uppercase text-[10px] tracking-[0.25em] font-bold hover:bg-brand-dark transition-colors cursor-pointer w-full md:w-auto font-sans">
+                        Submit Inquiry
                     </button>
                 </form>
             </div>
@@ -574,17 +565,19 @@
                         <svg class="w-8 h-8 text-brand-dark"><use href="#logo-icon"></use></svg>
                         <h3 class="font-serif text-2xl text-brand-dark">Totus Domum</h3>
                     </div>
-                    <p class="text-gray-500 text-sm max-w-xs font-normal font-sans">The premier lifestyle service for Malta's most discerning residents.</p>
+                    <p class="text-gray-500 text-xs max-w-xs font-normal font-sans leading-relaxed">
+                        Totus Domum is a private lifestyle management firm. Services are available exclusively to members and by referral.
+                    </p>
                 </div>
                 <div class="flex gap-12 mt-12 md:mt-0 font-sans">
                     <div class="flex flex-col gap-4">
-                        <a href="#" class="text-[10px] uppercase tracking-widest text-gray-500 hover:text-brand-gold cursor-interactive">Instagram</a>
-                        <a href="#" class="text-[10px] uppercase tracking-widest text-gray-500 hover:text-brand-gold cursor-interactive">LinkedIn</a>
+                        <a href="#" class="text-[10px] uppercase tracking-widest text-gray-400 hover:text-brand-gold cursor-pointer">Legal</a>
+                        <a href="#" class="text-[10px] uppercase tracking-widest text-gray-400 hover:text-brand-gold cursor-pointer">Privacy</a>
                     </div>
                 </div>
             </div>
             <div class="border-t border-gray-100 pt-8 flex justify-between items-center font-sans">
-                <p class="text-[10px] uppercase tracking-widest text-gray-400">&copy; 2024 Totus Domum.</p>
+                <p class="text-[10px] uppercase tracking-widest text-gray-300">&copy; 2024 Totus Domum.</p>
             </div>
         </div>
     </footer>
@@ -593,7 +586,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
-    <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
