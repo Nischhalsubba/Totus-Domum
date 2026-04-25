@@ -4,12 +4,16 @@
   "version": "0.1.0",
   "type": "module",
   "homepage": "https://nischhalsubba.github.io/Totus-Domum/",
+  "packageManager": "npm@11.6.2",
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=22.0.0",
+    "npm": ">=10.0.0"
   },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "typecheck": "tsc --noEmit --pretty false",
+    "check": "npm run typecheck && npm run build",
     "preview": "vite preview",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
