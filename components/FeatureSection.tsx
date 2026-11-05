@@ -10,7 +10,6 @@ const FeatureSection: React.FC = () => {
   });
 
   const y = useTransform(scrollYProgress, [0, 1], [0, -150]);
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
 
   return (
     <section ref={containerRef} className="relative h-[90vh] overflow-hidden flex items-center justify-center bg-brand-dark">

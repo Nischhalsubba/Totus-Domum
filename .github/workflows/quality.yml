@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: app
+        working-directory: .
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -32,6 +32,8 @@ jobs:
         run: npm install --no-audit --no-fund
       - name: Run project checks
         run: npm run check
+      - name: Verify static Pages entry point
+        run: test -f index.html && test -f dist/index.html
       - name: Configure GitHub Pages
         if: github.event_name == 'push'
         uses: actions/configure-pages@v5
@@ -39,7 +41,7 @@ jobs:
         if: github.event_name == 'push'
         uses: actions/upload-pages-artifact@v3
         with:
-          path: app/dist
+          path: dist
 
   deploy:
     if: github.event_name == 'push'

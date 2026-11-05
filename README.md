@@ -72,3 +72,8 @@ Use accurate service and location terminology such as **property concierge, prop
 flowchart LR
     CHANGE["Service / content / UI change"] --> VERIFY["Verify claims / contact data"] --> BUILD["Implement"] --> REVIEW["Responsive + accessibility review"] --> SEO["Metadata / structured-data check"] --> PR["Pull request"]
 ```
+
+
+## Root-level Vite and GitHub Pages
+
+The source `index.html`, TypeScript/React components, styles and `package.json` now live at repository root. Run `npm install && npm run check` from root. The GitHub Actions workflow publishes the **generated `dist/` directory**, preserving the existing Vite base `/Totus-Domum/`. The previous app README is archived in `docs/legacy-app-readme.md`.
