@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { LogoFull } from './Logo';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -8,6 +8,8 @@ const Navigation: React.FC = () => {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const mobileToggleRef = useRef<HTMLButtonElement>(null);
+  const firstMobileLinkRef = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,6 +18,19 @@ const Navigation: React.FC = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    if (!isMobileOpen) return;
+    firstMobileLinkRef.current?.focus();
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsMobileOpen(false);
+        mobileToggleRef.current?.focus();
+      }
+    };
+    document.addEventListener('keydown', closeOnEscape);
+    return () => document.removeEventListener('keydown', closeOnEscape);
+  }, [isMobileOpen]);
 
   return (
     <>
@@ -85,7 +100,7 @@ const Navigation: React.FC = () => {
         </div>
 
         {/* Mobile Toggle */}
-        <button type="button" aria-label={isMobileOpen ? "Close navigation menu" : "Open navigation menu"} aria-expanded={isMobileOpen} aria-controls="mobile-navigation" className="md:hidden text-white" onClick={() => setIsMobileOpen(!isMobileOpen)}>
+        <button type="button" ref={mobileToggleRef} aria-label={isMobileOpen ? "Close navigation menu" : "Open navigation menu" aria-expanded={isMobileOpen} aria-controls="mobile-navigation" className="md:hidden text-white" onClick={() => setIsMobileOpen(!isMobileOpen)}>
           {isMobileOpen ? <X /> : <Menu />}
         </button>
       </div>
@@ -96,6 +111,8 @@ const Navigation: React.FC = () => {
       {isMobileOpen && (
         <motion.div 
             id="mobile-navigation"
+            role="navigation"
+            aria-label="Mobile menu"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -104,13 +121,17 @@ const Navigation: React.FC = () => {
            <div className="flex flex-col space-y-8 items-center text-center">
             {['Home', 'Philosophy', 'Services', 'Contact'].map((item, i) => (
                 <motion.a 
-                    key={item} 
+                    key={item}
+                    ref={i === 0 ? firstMobileLinkRef : undefined}
                     href={`#${item.toLowerCase()}`} 
                     initial={{ y: 20, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.1 * i }}
                     className="text-3xl font-serif text-white/90 hover:text-brand-gold hover:italic transition-all"
-                    onClick={() => setIsMobileOpen(false)}
+                    onClick={() => {
+                      setIsMobileOpen(false);
+                      mobileToggleRef.current?.focus();
+                    }}
                 >
                 {item}
                 </motion.a>
