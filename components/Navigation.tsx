@@ -43,7 +43,6 @@ const Navigation: React.FC = () => {
             className="relative group h-full flex items-center"
             onMouseEnter={() => setDropdownOpen(true)}
             onMouseLeave={() => setDropdownOpen(false)}
-            onFocus={() => setDropdownOpen(true)}
             onBlur={(event) => {
               if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setDropdownOpen(false);
             }}
