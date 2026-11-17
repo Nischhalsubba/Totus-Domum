@@ -51,12 +51,16 @@ flowchart TD
 
 ## Getting started
 
+This repository is a root-level React/Vite application. Use Node.js 22+ and npm 10+ (see [`package.json`](./package.json)):
+
 ```bash
 git clone https://github.com/Nischhalsubba/Totus-Domum.git
 cd Totus-Domum
+npm install
+npm run dev
 ```
 
-Use the project files, manifests and lockfiles to determine the current runtime and development commands.
+Run `npm run check` before proposing changes. The check runs TypeScript validation and the production build; `npm run preview` serves the built app locally. There is no committed npm lockfile, so use `npm install` rather than `npm ci`.
 
 ## Design & accessibility
 
