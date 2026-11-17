@@ -20,7 +20,7 @@ const ContactForm: React.FC = () => {
       `Phone: ${phone || 'Not provided'}`,
       '',
       message.trim(),
-    ].join('\\n');
+    ].join('\n');
     window.location.href = `mailto:info@totusdomum.com?subject=${encodeURIComponent('Totus Domum enquiry')}&body=${encodeURIComponent(body)}`;
   };
 
