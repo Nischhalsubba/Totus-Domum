@@ -38,13 +38,13 @@ function App() {
       <CustomCursor />
       <Navigation />
       
-      <main>
+      <main id="home">
         <Hero />
-        <IntroSection />
-        <Services />
+        <div id="philosophy" className="scroll-mt-24"><IntroSection /></div>
+        <div id="services" className="scroll-mt-24"><Services /></div>
         <FeatureSection />
         <WatermarkSection />
-        <ContactForm />
+        <div id="contact" className="scroll-mt-24"><ContactForm /></div>
       </main>
 
       <Footer />
