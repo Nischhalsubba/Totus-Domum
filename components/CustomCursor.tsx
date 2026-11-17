@@ -39,7 +39,7 @@ const CustomCursor: React.FC = () => {
     <>
       <style>{`
         body { cursor: none; }
-        @media (hover: none) { body { cursor: auto; } .custom-cursor { display: none; } }
+        @media (hover: none), (prefers-reduced-motion: reduce) { body { cursor: auto; } .custom-cursor { display: none; } }
       `}</style>
       <motion.div
         className="custom-cursor fixed top-0 left-0 w-4 h-4 rounded-full bg-brand-gold mix-blend-difference pointer-events-none z-[100]"
