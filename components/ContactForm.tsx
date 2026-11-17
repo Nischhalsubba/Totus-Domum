@@ -59,7 +59,7 @@ const ContactForm: React.FC = () => {
                     </div>
                     <div>
                         <h4 className="font-serif text-lg text-brand-dark mb-2">Phone</h4>
-                        <p className="text-gray-600">+356 99 99 1972</p>
+                        <a href="tel:+35699991972" className="text-gray-600 hover:text-brand-gold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold" aria-label="Call Totus Domum at +356 99 99 1972">+356 99 99 1972</a>
                     </div>
                 </div>
             </motion.div>
