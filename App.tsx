@@ -20,10 +20,12 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Wait for the 2.5s progress bar + buffer
-    const timer = setTimeout(() => {
-        setIsLoading(false);
-    }, 2800);
+    // A decorative loading animation should never delay reduced-motion users.
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setIsLoading(false);
+      return;
+    }
+    const timer = setTimeout(() => setIsLoading(false), 2800);
     return () => clearTimeout(timer);
   }, []);
 
