@@ -11,12 +11,18 @@ const ContactForm: React.FC = () => {
     const fields = new FormData(event.currentTarget);
     const name = String(fields.get('firstName') ?? '').trim();
     const email = String(fields.get('email') ?? '').trim();
-    const service = String(fields.get('service') ?? '').trim();
+    const serviceKey = String(fields.get('service') ?? '').trim();
+    const serviceLabels: Record<string, string> = {
+      residence: 'Residence Management',
+      lifestyle: 'Lifestyle Support',
+      property: 'Property Search',
+    };
+    const service = serviceLabels[serviceKey] ?? 'General enquiry';
     const phone = String(fields.get('phone') ?? '').trim();
     const body = [
       `Name: ${name}`,
       `Email: ${email}`,
-      `Service: ${service || 'General enquiry'}`,
+      `Service: ${service}`,
       `Phone: ${phone || 'Not provided'}`,
       '',
       message.trim(),
