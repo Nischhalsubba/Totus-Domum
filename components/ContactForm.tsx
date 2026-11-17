@@ -4,6 +4,26 @@ import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 
 const ContactForm: React.FC = () => {
+  const [message, setMessage] = React.useState('');
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const fields = new FormData(event.currentTarget);
+    const name = String(fields.get('firstName') ?? '').trim();
+    const email = String(fields.get('email') ?? '').trim();
+    const service = String(fields.get('service') ?? '').trim();
+    const phone = String(fields.get('phone') ?? '').trim();
+    const body = [
+      `Name: ${name}`,
+      `Email: ${email}`,
+      `Service: ${service || 'General enquiry'}`,
+      `Phone: ${phone || 'Not provided'}`,
+      '',
+      message.trim(),
+    ].join('\\n');
+    window.location.href = `mailto:info@totusdomum.com?subject=${encodeURIComponent('Totus Domum enquiry')}&body=${encodeURIComponent(body)}`;
+  };
+
   return (
     <section className="py-24 md:py-32 bg-brand-light relative z-20">
       <div className="container mx-auto px-6">
@@ -46,12 +66,12 @@ const ContactForm: React.FC = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             >
-                <form className="space-y-12">
+                <form className="space-y-12" onSubmit={handleSubmit}>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                         <div className="relative">
                             <input 
                                 type="text" 
-                                id="firstName" 
+                                id="firstName" name="firstName" autoComplete="given-name" required 
                                 className="peer w-full border-b border-gray-300 py-3 text-brand-dark focus:border-brand-gold focus:outline-none bg-transparent placeholder-transparent transition-colors"
                                 placeholder="First Name" 
                             />
@@ -61,7 +81,7 @@ const ContactForm: React.FC = () => {
                         </div>
                         
                         <div className="relative">
-                             <select id="service" className="peer w-full border-b border-gray-300 py-3 text-brand-dark focus:border-brand-gold focus:outline-none bg-transparent">
+                             <select id="service" name="service" className="peer w-full border-b border-gray-300 py-3 text-brand-dark focus:border-brand-gold focus:outline-none bg-transparent">
                                 <option value="">Select Service</option>
                                 <option value="residence">Residence Management</option>
                                 <option value="lifestyle">Lifestyle Support</option>
@@ -77,7 +97,7 @@ const ContactForm: React.FC = () => {
                         <div className="relative">
                             <input 
                                 type="email" 
-                                id="email" 
+                                id="email" name="email" autoComplete="email" required 
                                 className="peer w-full border-b border-gray-300 py-3 text-brand-dark focus:border-brand-gold focus:outline-none bg-transparent placeholder-transparent"
                                 placeholder="Email Address" 
                             />
@@ -88,7 +108,7 @@ const ContactForm: React.FC = () => {
                         <div className="relative">
                             <input 
                                 type="tel" 
-                                id="phone" 
+                                id="phone" name="phone" autoComplete="tel" 
                                 className="peer w-full border-b border-gray-300 py-3 text-brand-dark focus:border-brand-gold focus:outline-none bg-transparent placeholder-transparent"
                                 placeholder="Phone Number" 
                             />
@@ -100,19 +120,19 @@ const ContactForm: React.FC = () => {
 
                     <div className="relative">
                         <textarea 
-                            id="message" 
-                            rows={4}
+                            id="message" name="message" 
+                            rows={4} maxLength={180} value={message} onChange={(event) => setMessage(event.target.value)}
                             className="peer w-full border border-gray-200 p-4 text-brand-dark focus:border-brand-gold focus:outline-none bg-transparent placeholder-transparent resize-none"
                             placeholder="Message" 
                         ></textarea>
                         <label htmlFor="message" className="absolute left-0 -top-6 text-xs text-gray-400">
                             Message
                         </label>
-                        <div className="text-right mt-1 text-xs text-gray-300">0 / 180</div>
+                        <div className="text-right mt-1 text-xs text-gray-500">{message.length} / 180</div>
                     </div>
 
                     <motion.button 
-                        type="button" 
+                        type="submit" 
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.95 }}
                         className="group flex items-center gap-4 bg-brand-gold text-white px-10 py-4 uppercase text-[10px] tracking-[0.2em] font-bold hover:bg-brand-dark transition-colors duration-300"
@@ -125,6 +145,7 @@ const ContactForm: React.FC = () => {
                             <ArrowRight className="w-full h-full" />
                         </motion.div>
                     </motion.button>
+                    <p className="text-sm text-gray-600">Opens your email app with a prepared message. Send the draft there to complete your enquiry.</p>
                 </form>
             </motion.div>
         </div>
