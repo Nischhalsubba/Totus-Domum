@@ -4,10 +4,12 @@ import { motion } from 'framer-motion';
 const CustomCursor: React.FC = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
+  const [hasMoved, setHasMoved] = useState(false);
 
   useEffect(() => {
     const updateMousePosition = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
+      setHasMoved(true);
     };
 
     const handleMouseOver = (e: MouseEvent) => {
@@ -38,11 +40,12 @@ const CustomCursor: React.FC = () => {
   return (
     <>
       <style>{`
-        body { cursor: none; }
+        @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) { body { cursor: none; } }
         @media (hover: none), (prefers-reduced-motion: reduce) { body { cursor: auto; } .custom-cursor { display: none; } }
       `}</style>
       <motion.div
         className="custom-cursor fixed top-0 left-0 w-4 h-4 rounded-full bg-brand-gold mix-blend-difference pointer-events-none z-[100]"
+        style={{ visibility: hasMoved ? 'visible' : 'hidden' }}
         animate={{
           x: mousePosition.x - 8,
           y: mousePosition.y - 8,
@@ -57,6 +60,7 @@ const CustomCursor: React.FC = () => {
       />
       <motion.div 
         className="custom-cursor fixed top-0 left-0 w-8 h-8 rounded-full border border-brand-gold pointer-events-none z-[100]"
+        style={{ visibility: hasMoved ? 'visible' : 'hidden' }}
         animate={{
             x: mousePosition.x - 16,
             y: mousePosition.y - 16,
