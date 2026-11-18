@@ -100,7 +100,7 @@ const Navigation: React.FC = () => {
         </div>
 
         {/* Mobile Toggle */}
-        <button type="button" ref={mobileToggleRef} aria-label={isMobileOpen ? "Close navigation menu" : "Open navigation menu" aria-expanded={isMobileOpen} aria-controls="mobile-navigation" className="md:hidden text-white" onClick={() => setIsMobileOpen(!isMobileOpen)}>
+        <button type="button" ref={mobileToggleRef} aria-label={isMobileOpen ? "Close navigation menu" : "Open navigation menu"} aria-expanded={isMobileOpen} aria-controls="mobile-navigation" className="md:hidden text-white" onClick={() => setIsMobileOpen(!isMobileOpen)}>
           {isMobileOpen ? <X /> : <Menu />}
         </button>
       </div>
